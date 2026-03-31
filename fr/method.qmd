@@ -89,4 +89,5 @@ Je conçois l’analyse comme un dialogue entre les données et les équipes, vi
 - Capacité d’appropriation rapide de nouveaux outils, langages et méthodes  
 
 Mon positionnement repose sur une combinaison :  
+
 > analyse rigoureuse → structuration → insight → communication.

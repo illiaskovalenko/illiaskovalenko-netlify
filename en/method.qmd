@@ -89,4 +89,5 @@ I view analysis as a bridge between data and teams, supporting informed decision
 - Rapid ability to adopt new tools, languages, and methods  
 
 My positioning combines:  
+
 > rigorous analysis → structuring → insight → communication.
