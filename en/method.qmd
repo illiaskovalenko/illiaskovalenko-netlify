@@ -1,0 +1,92 @@
+---
+title: "Approach"
+---
+
+# Analytical Approach
+
+My approach combines analytical rigor, data structuring, and actionable insight generation.
+
+I primarily work with complex, heterogeneous, or poorly structured data, using exploration, modeling, and interpretation methods.
+
+The objective is consistent: transforming data into clear and decision-oriented insights.
+
+---
+
+## 1. Data exploration and understanding
+
+- Exploratory data analysis (EDA) using R / Python  
+- Identification of structures, anomalies, and biases  
+- Text data analysis (qualitative and quantitative)  
+- Integration of heterogeneous data sources  
+
+This phase focuses on understanding the internal logic of the data before modeling.
+
+---
+
+## 2. Data cleaning and structuring
+
+- Data cleaning, normalization, and disambiguation  
+- Structuring complex datasets (tabular and relational)  
+- Database modeling (SQL, Neo4j / Cypher)  
+- Building usable datasets  
+
+I place strong emphasis on handling messy or incomplete data requiring advanced structuring.
+
+---
+
+## 3. Statistical analysis and modeling
+
+- Descriptive and inferential statistics  
+- Modeling relationships between variables (regression, PCA, etc.)  
+- Network and relational analysis  
+- Critical interpretation of results  
+
+My approach is grounded in solid statistical and econometric foundations (including Wooldridge).
+
+---
+
+## 4. Visualization and interpretation
+
+- Data visualization (R, ggplot2, BI tools in progress)  
+- Identification of patterns and relationships  
+- Clear and structured representations  
+
+Visualization is central to both analysis and communication.
+
+---
+
+## 5. Data storytelling and communication
+
+- Translating analysis into actionable insights  
+- Structuring results into clear narratives  
+- Adapting communication to non-technical stakeholders  
+- Concise and effective presentation  
+
+I view analysis as a bridge between data and teams, supporting informed decision-making.
+
+---
+
+## 6. Tools and environment
+
+- R (tidyverse, ggplot2)  
+- Python (pandas, numpy)  
+- SQL (in progress)  
+- Neo4j / Cypher  
+- Excel (advanced)  
+- Power BI (in progress), Tableau (in progress)  
+- RStudio / Posit, Jupyter, VS Code  
+
+---
+
+## 7. Key strengths
+
+- Handling complex and poorly structured data  
+- Text data analysis (qualitative & quantitative)  
+- Advanced data structuring  
+- Strong methodological rigor  
+- Ability to communicate insights clearly  
+- Strong autonomy in analytical work and learning  
+- Rapid ability to adopt new tools, languages, and methods  
+
+My positioning combines:  
+> rigorous analysis → structuring → insight → communication.

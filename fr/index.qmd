@@ -1,0 +1,52 @@
+---
+title: "Analyse de données et prise de décision"
+---
+
+::: {.columns .align-items-center}
+
+::: {.column width="65%"}
+
+::: {.callout-note title="À propos de moi"}
+::: {.hero-text}
+Doctorant en sciences humaines et sociales en reconversion vers la data analyse
+:::
+*#data, #analyse, #insight*
+
+:::
+:::
+
+::: {.column width="35%"}
+
+![](/images/profile.jpg){.profile-photo}
+
+:::
+
+:::
+
+# Qui suis-je
+
+Doctorant en cotutelle (EPHE-PSL / UCLouvain), je développe une expertise en analyse structurée de données complexes.
+
+Mon profil se distingue par une approche méthodique :  je ne me limite pas aux outils, mais je construis des analyses rigoureuses, interprétables et utiles à la décision.
+
+Je m’oriente vers la data analyse avec une motivation centrale :  
+faire émerger du sens à partir de données complexes, en identifiant des relations, des tendances et des structures sous-jacentes.
+
+Je porte une attention particulière à la traduction de ces résultats — via la structuration, la visualisation et la narration — pour les rendre immédiatement compréhensibles et exploitables.
+
+---
+
+## Ce que je peux vous apporter
+
+- Structuration et clarification de problématiques complexes  
+- Nettoyage, transformation et fiabilisation de données  
+- Analyse rigoureuse appuyée sur des méthodes statistiques  
+- Visualisation et mise en récit des données (data storytelling)  
+- Traduction des analyses en insights compréhensibles pour des interlocuteurs non techniques  
+- Mise en dialogue entre les données et les équipes pour orienter la décision  
+
+---
+
+## Explorez mes projets, ma démarche et mon parcours
+
+[Projets](projects.qmd) · [Démarche](method.qmd) · [CV](cv.qmd) · [Contact](contact.qmd)

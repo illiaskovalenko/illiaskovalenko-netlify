@@ -1,0 +1,9 @@
+---
+title: "Projets"
+---
+
+Cette section est en cours de développement.
+
+Des projets d’analyse de données, incluant exploration, modélisation et visualisation, seront prochainement disponibles.
+
+Les datasets, méthodologies et résultats détaillés seront présentés sous forme d’études de cas.

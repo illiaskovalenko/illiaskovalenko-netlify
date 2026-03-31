@@ -1,0 +1,20 @@
+color:
+  palette:
+    oc-purple: "#7D47F4"
+    oc-ink: "#1F1F24"
+    oc-paper: "#FBF7EF"
+    oc-white: "#FFFFFF"
+
+  background: oc-paper
+  foreground: oc-ink
+  primary: oc-purple
+
+logo:
+  medium: images/ik-monogram.svg
+
+typography:
+  fonts:
+    - family: Inter
+      source: google
+  base: Inter
+  headings: Inter

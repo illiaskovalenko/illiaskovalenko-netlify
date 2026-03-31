@@ -1,0 +1,314 @@
+---
+title: "About this site"
+---
+
+## Overview
+
+This website is a bilingual professional portfolio built with **Quarto** and deployed via **GitHub Pages**.  
+
+Its objective -- beyond being my professional portfolio -- is to provide a structurally robust, symmetric FR/EN architecture with deterministic rendering and a dynamic language switch mechanism.
+
+---
+
+## Multilingual architecture
+
+The multilingual setup was inspired by the three-profile logic described in:
+
+<https://ati-ozgur.github.io/blog-posts/quarto-multi-language-book.html>
+
+The idea of using distinct rendering profiles informed the architecture, but the implementation here adopts a stricter folder-level separation.
+
+Three rendering profiles are used in this project:
+
+- `def`: renders the root-level pages (`index.qmd` as the language selection landing page, and `about.qmd` describing how the site is built).
+- `en`: renders the English version of the site.
+- `fr`: renders the French version of the site.
+
+In practice, `def` is used for the shared entry points, while `en` and `fr` handle the language-specific website configuration (navigation, paths, and page rendering).
+
+### Source structure
+
+```text
+.
+├── _quarto.yml
+├── _quarto-def.yml
+├── _quarto-fr.yml
+├── _quarto-en.yml
+├── build.ps1
+├── js/
+│   └── lang-switch.js
+├── fr/
+│   ├── index.qmd
+│   ├── method.qmd
+│   └── ...
+└── en/
+    ├── index.qmd
+    ├── method.qmd
+    └── ...
+
+```
+
+Each language has:
+
+- its own source directory
+- symmetric filenames (`/en/method.qmd` corresponds to `/fr/method.qmd)
+- language-specific navigation configuration (see below)
+
+### Main `_quarto.yml` elements
+
+Rendering is controlled via `_quarto.yml`:
+
+```yaml
+project:
+  type: website
+  output-dir: docs
+```
+
+And infra:
+
+```yml
+profile:
+  group:
+    - [def, en, fr]
+```
+
+This configuration choses the one and only directory for the output, indicates multiple profiles, prevents recursive nesting (e.g., `docs/en/en`) and ensures predictable builds.
+
+During development, an important behavior of Quarto had to be addressed. When rendering source `.qmd` files located inside language-specific folders (e.g., `fr/` and `en/`), Quarto preserves the source directory structure in the output directory.
+
+This means that if the source file is:
+
+```text
+en/method.qmd
+```
+
+Quarto will generate:
+
+```text
+docs/en/method.html
+```
+
+This is expected behavior. However, when rendering was triggered from within a subdirectory or when language prefixes were redundantly declared in configuration, Quarto repeated the parent directory in the output path. As a result, nested structures such as:
+
+```text
+docs/en/en/method.html
+docs/fr/fr/index.html
+```
+
+were created. In other words, Quarto replicated the mother directory structure twice during rendering.
+
+### Rendering three language profiles
+
+The issue was resolved by:
+
+- enforcing a single project root
+- declaring a unique `output-dir: docs`
+- avoiding redundant language prefixes in configuration
+- ensuring rendering is always triggered from the project root for three profiles together, with `--no-clean` option:
+
+```powershell
+quarto render --profile def --no-clean
+quarto render --profile fr --no-clean
+quarto render --profile en --no-clean
+```
+
+This guarantees deterministic output with no files or folders being suppressed during rendering:
+
+```text
+docs/
+├── fr/
+└── en/
+└── index.html
+└── ...
+```
+
+---
+
+### Language switch mechanism
+
+The site includes a custom JavaScript file:
+
+```java
+document.addEventListener("DOMContentLoaded", () => {
+    const path = window.location.pathname;
+  
+    // Supporte éventuellement un site servi sous /docs/
+    const base = path.startsWith("/docs/") ? "/docs" : "";
+  
+    const inEN = path.startsWith(base + "/en/");
+    const inFR = path.startsWith(base + "/fr/");
+  
+    if (!inEN && !inFR) return;
+  
+    // URL miroir = même chemin après /en/ ou /fr/
+    const mirrorPath = inEN
+      ? path.replace(new RegExp("^" + base + "/en/"), base + "/fr/")
+      : path.replace(new RegExp("^" + base + "/fr/"), base + "/en/");
+  
+    const mirrorUrl = mirrorPath + window.location.search + window.location.hash;
+  
+    // On vise le bouton langue unique par son texte visible
+    const navAnchors = Array.from(document.querySelectorAll("nav a"));
+    const target = navAnchors.find(a => {
+      const t = a.textContent.trim().toLowerCase();
+      return t === "english" || t === "français";
+    });
+  
+    if (target) target.setAttribute("href", mirrorUrl);
+  });  
+```
+
+The `/js` folder should be included in `resources` in the main `_quarto.yml` file:
+
+```yml
+project:
+  resources:
+    - js
+```
+
+ and the `html` options should include the following `include-in-header` section:
+
+```yml
+format:
+  html:
+    include-in-header:
+      - text: |
+          <script defer src="/js/lang-switch.js"></script>
+```
+
+The logic of the javascript instructions mirror the current path.
+
+Example:
+
+- If the user is on `/en/method.html`
+- Clicking the language button redirects to `/fr/method.html`
+
+The switch does not return to the homepage but preserves the exact page path.
+
+Only one button is displayed:
+
+- If current language = EN → button shows `FR`
+- If current language = FR → button shows `EN`
+
+This ensures clean navigation and avoids redundant interface elements.
+
+---
+
+### Profiles' configurations
+
+Here is the way the `_quarto-en.yml` and `_quarto-fr.yml` have been configured:
+
+```yml
+project:
+  render:
+    - en/*.qmd
+
+website:
+  navbar:
+    background: primary
+    search: true
+    left:
+      - href: /en/index.html
+        text: Home
+      - href: /en/projects.html
+        text: Projects
+      - href: /en/method.html
+        text: Approach
+      - href: /en/cv.html
+        text: CV
+      - href: /en/contact.html
+        text: Contact
+    right:
+      - text: Français
+        href: /fr/
+
+format:
+  html:
+    lang: en-GB
+    output-dir: en
+```
+
+The default profile has simpler structure, because it doesn't need the navigation bar:
+
+```yml
+project:
+  render:
+    - index.qmd
+    - about.qmd
+
+website:
+  favicon: images/favicon.ico
+  navbar: false
+  search: false
+```
+
+---
+
+## Build workflow
+
+```powershell
+# Go to project root (in case script is run from elsewhere)
+Set-Location $PSScriptRoot
+
+Write-Host "Rendering Quarto..."
+quarto render --profile def --no-clean
+quarto render --profile fr --no-clean
+quarto render --profile en --no-clean
+
+Write-Host "Git add..."
+git add .
+
+Write-Host "Git commit..."
+git commit -m "Update site"
+
+Write-Host "Git push..."
+git push
+
+Write-Host "Done."
+```
+
+A PowerShell script (`build.ps1`) is used to automate the rendering process before deployment and to push the new version of the website on to Github.
+
+When the script is in the project root folder, you can run the entire script:
+
+```powershell
+.\build.ps1
+```
+
+---
+
+## Development process
+
+The site was built iteratively through:
+
+- experimentation with multilingual profile configurations  
+- debugging output directory duplication  
+- refining navbar symmetry  
+- writing and correcting the JavaScript path-mirroring logic  
+- stabilizing CSS and font overrides  
+- restructuring folders to guarantee deterministic builds  
+
+The final structure reflects:
+
+- precise folder hierarchy  
+- explicit resource management  
+- separation between content, configuration, and deployment logic  
+
+---
+
+## Main contribution
+
+This project demonstrates the construction of:
+
+> A structured bilingual Quarto portfolio  
+> with deterministic rendering and a custom dynamic language switch mechanism.
+
+The architecture is scalable and can support additional languages without redesigning the core structure.
+
+---
+
+## Authorship
+
+Parts of the configuration logic, multilingual architecture refinement, and the language-switch JavaScript were developed through iterative collaboration with ChatGPT 5.2 (OpenAI).
+
+The final folder structure, rendering workflow, and deployment pipeline were designed, tested, and stabilized independently.

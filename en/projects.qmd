@@ -1,0 +1,9 @@
+---
+title: "Projects"
+---
+
+This section is currently under development.
+
+Data analysis projects, including exploration, modeling, and visualization, will be available soon.
+
+Datasets, methodologies, and results will be presented as structured case studies.

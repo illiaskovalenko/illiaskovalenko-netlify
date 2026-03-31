@@ -1,0 +1,106 @@
+---
+title: "CV"
+---
+
+[📄 Download CV (PDF)](/en/cv.pdf)
+
+---
+
+# Profile
+
+Joint PhD candidate (EPHE-PSL / UCLouvain) transitioning into data analysis.
+
+I leverage strong analytical and structuring skills to process complex data and produce rigorous, interpretable, and decision-oriented analyses.
+
+My approach focuses on transforming heterogeneous data into actionable insights through analytical methods, visualization, and clear communication.
+
+---
+
+# Experience
+
+## Université Paris Sciences et Lettres (PSL)  
+**PhD Candidate – Data analysis and complex data structuring**  
+Paris | 2023–2026  
+
+- Built and structured multi-source datasets (cleaning, normalization, disambiguation).
+- Designed relational and graph data models (SQLite, Neo4j).
+- Developed analytical workflows in R (tidyverse): transformation, aggregation, EDA.
+- Produced reproducible analytical reports (Quarto).
+- Conducted network analysis to identify structures and patterns.
+
+---
+
+## Université Paris Nanterre  
+**Teaching Assistant – Data analysis and modeling**  
+Nanterre | 2025  
+
+- Taught data structuring and variable formalization.
+- Introduced modeling of relationships between variables.
+- Trained students in applied statistical methods (t-tests, ANOVA, OLS regression, PCA).
+- Supervised analysis, interpretation, and reporting.
+
+---
+
+## Université Paris Lumières  
+**Operations Manager – Process analysis and optimization**  
+Campus Condorcet | 2023  
+
+- Analyzed and optimized organizational processes.
+- Defined and monitored key performance indicators (KPIs).
+- Structured and improved reliability of data flows.
+- Coordinated stakeholders and managed operations.
+
+---
+
+# Skills
+
+## Data analysis
+- Data cleaning and transformation  
+- Exploratory data analysis (EDA)  
+- Descriptive and statistical analysis  
+- Modeling  
+- Analytical reporting  
+
+## Data tools
+- R (tidyverse, ggplot2)  
+- Python (pandas, numpy)  
+- SQL (in progress)  
+- Neo4j  
+- Jamovi, Stata  
+
+## Business analysis
+- Problem structuring  
+- Process mapping  
+- KPI tracking  
+- Continuous improvement  
+
+## Tools
+- Git / GitHub  
+- Excel / Google Sheets  
+- Quarto / Markdown  
+- Notion / Trello  
+
+## Languages
+French C1 · English C1 · Ukrainian C2 · Russian C2 · Greek B2  
+
+---
+
+# Education
+
+## PhD – History (ongoing)  
+EPHE-PSL / UCLouvain  
+Since 2023  
+
+## Master’s degree – Civilizations, cultures, societies  
+EPHE-PSL  
+2022–2023 · Highest honors  
+
+## Bachelor’s degree – Psychology  
+Université Paris Nanterre  
+
+---
+
+# Certifications
+
+2024 — Cypher and Graph Data Modeling (Neo4j GraphAcademy)  
+2024 — Introduction to R (EPHE-PSL)

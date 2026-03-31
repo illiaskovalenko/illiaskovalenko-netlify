@@ -1,0 +1,107 @@
+---
+title: "CV"
+---
+
+[📄 Télécharger le CV (PDF)](/fr/cv.pdf)
+
+---
+
+# Profil
+
+Doctorant en cotutelle EPHE-PSL / UCLouvain en transition vers la data analyse.
+
+Je mobilise une forte capacité d’analyse, de structuration et de traitement de données complexes pour produire des analyses rigoureuses, interprétables et utiles à la prise de décision.
+
+Mon approche repose sur la transformation de données hétérogènes en insights exploitables, via des méthodes analytiques, la visualisation et la mise en récit des résultats.
+
+---
+
+# Expérience
+
+## Université Paris Sciences et Lettres (PSL)  
+**Doctorant – Analyse de données et structuration de corpus complexes**  
+Paris | 2023–2026  
+
+- Constitution et structuration d’un corpus de données multi-sources (nettoyage, normalisation, désambiguïsation).
+- Conception d’un modèle de données relationnel et graphe (SQLite, Neo4j).
+- Développement de workflows d’analyse sous R (tidyverse) : transformation, agrégation, EDA.
+- Production de rapports analytiques reproductibles (Quarto).
+- Analyse de réseaux et identification de structures et tendances.
+
+---
+
+## Université Paris Nanterre  
+**Chargé d’enseignement – Analyse et modélisation de données**  
+Nanterre | 2025  
+
+- Enseignement de la structuration des données et de la formalisation des variables.
+- Introduction à la modélisation des relations entre variables.
+- Formation aux méthodes statistiques appliquées (tests T, ANOVA, régression OLS, PCA).
+- Encadrement de l’analyse, de l’interprétation et du reporting.
+
+---
+
+## Université Paris Lumières  
+**Responsable – Analyse opérationnelle et optimisation des processus**  
+Campus Condorcet | 2023  
+
+- Analyse et optimisation de processus organisationnels.
+- Définition et suivi d’indicateurs de performance (KPI).
+- Structuration et fiabilisation des flux de données.
+- Coordination multi-acteurs et pilotage opérationnel.
+
+---
+
+# Compétences
+
+## Data analysis
+- Nettoyage et transformation de données  
+- Analyse exploratoire (EDA)  
+- Statistiques descriptives et analyse statistique  
+- Modélisation  
+- Reporting analytique  
+
+## Data tools
+- R (tidyverse, ggplot2)  
+- Python (pandas, numpy)  
+- SQL (en cours)  
+- Neo4j  
+- Jamovi, Stata  
+
+## Business analysis
+- Analyse de problématiques  
+- Process mapping  
+- KPI et pilotage  
+- Amélioration continue  
+
+## Outils
+- Git / GitHub  
+- Excel / Google Sheets  
+- Quarto / Markdown  
+- Notion / Trello  
+
+## Langues
+Français C1 · Anglais C1 · Ukrainien C2 · Russe C2 · Grec B2  
+
+---
+
+# Formation
+
+## Doctorat – Histoire (en cours)  
+EPHE-PSL / UCLouvain  
+Depuis 2023  
+
+## Master – Civilisations, cultures, sociétés  
+EPHE-PSL  
+2022–2023 · Mention Très bien  
+
+## Licence – Psychologie  
+Université Paris Nanterre  
+2019–2022  
+
+---
+
+# Certifications
+
+2024 — Cypher and Graph Data Modeling (Neo4j GraphAcademy)  
+2024 — Initiation au langage R (EPHE-PSL)

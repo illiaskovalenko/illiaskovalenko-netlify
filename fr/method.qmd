@@ -1,0 +1,92 @@
+---
+title: "Démarche"
+---
+
+# Démarche analytique
+
+Mon approche repose sur une articulation entre rigueur analytique, structuration des données et production d’insights exploitables.
+
+Je travaille en priorité sur des données complexes, hétérogènes ou imparfaitement structurées, en mobilisant des méthodes d’exploration, de modélisation et d’interprétation.
+
+L’objectif est constant : transformer les données en informations compréhensibles et utiles à la prise de décision.
+
+---
+
+## 1. Exploration et compréhension des données
+
+- Analyse exploratoire (EDA) sous R / Python  
+- Identification des structures, anomalies et biais  
+- Analyse de données textuelles (qualitative et quantitative)  
+- Mise en relation de sources hétérogènes  
+
+Cette phase vise à comprendre la logique interne des données avant toute modélisation.
+
+---
+
+## 2. Nettoyage et structuration
+
+- Nettoyage, normalisation et désambiguïsation  
+- Structuration de données complexes (tabulaires et relationnelles)  
+- Modélisation de bases de données (SQL, Neo4j / Cypher)  
+- Construction de datasets exploitables  
+
+Je porte une attention particulière aux données mal ordonnées ou incomplètes, qui nécessitent une structuration avancée.
+
+---
+
+## 3. Analyse statistique et modélisation
+
+- Statistiques descriptives et inférentielles  
+- Modélisation des relations entre variables (régression, PCA, etc.)  
+- Analyse de réseaux et de structures relationnelles  
+- Interprétation critique des résultats  
+
+Ma pratique s’appuie sur des bases solides en statistiques et économétrie (notamment Wooldridge).
+
+---
+
+## 4. Visualisation et interprétation
+
+- Visualisation de données (R, ggplot2, outils BI en cours)  
+- Mise en évidence de tendances et relations  
+- Construction de représentations claires et synthétiques  
+
+La visualisation est un outil central pour comprendre et faire comprendre les résultats.
+
+---
+
+## 5. Data storytelling et communication
+
+- Traduction des analyses en insights exploitables  
+- Structuration narrative des résultats  
+- Adaptation à des interlocuteurs non techniques  
+- Présentation claire et synthétique  
+
+Je conçois l’analyse comme un dialogue entre les données et les équipes, visant à orienter la décision.
+
+---
+
+## 6. Outils et environnement
+
+- R (tidyverse, ggplot2)  
+- Python (pandas, numpy)  
+- SQL (en cours)  
+- Neo4j / Cypher  
+- Excel (avancé)  
+- Power BI (en cours), Tableau (en cours)  
+- RStudio / Posit, Jupyter, VS Code  
+
+---
+
+## 7. Atouts différenciants
+
+- Analyse de données complexes et mal structurées  
+- Analyse de données textuelles (qualitative & quantitative)  
+- Structuration avancée de l’information  
+- Rigueur méthodologique issue de la recherche  
+- Capacité à produire des analyses claires et communicables  
+- Forte autonomie de travail et d’apprentissage  
+- Capacité d’appropriation rapide de nouveaux outils, langages et méthodes  
+
+Mon positionnement repose sur une combinaison :  
+> analyse rigoureuse → structuration → insight → communication.

@@ -1,0 +1,39 @@
+---
+title: "Reach out"
+---
+
+I am currently seeking opportunities in data analysis (2 year work-study programme).
+
+---
+
+## Contact details
+
+::: {.columns}
+
+::: {.column width="50%"}
+
+🔗 **LinkedIn**  
+[illiakovalenko](https://www.linkedin.com/in/illiakovalenko){target="_blank"}
+
+💻 **GitHub**  
+[illiaskovalenko](https://github.com/illiaskovalenko){target="_blank"}
+
+:::
+
+::: {.column width="50%"}
+
+✉️ **Email**  
+[illiaskovalenko@gmail.com](mailto:illiaskovalenko@gmail.com)
+
+📍 **Location**  
+Paris / Île-de-France
+
+:::
+
+:::
+
+---
+
+## References
+
+Letters of recommendation available upon request.

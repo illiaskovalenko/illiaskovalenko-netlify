@@ -1,0 +1,30 @@
+project:
+  render:
+    - fr/*.qmd
+
+website:
+  title: "Illia Kovalenko"
+  favicon: images/favicon.ico
+  navbar:
+    logo: images/ik-monogram.svg
+    background: primary
+    search: true
+    left:
+      - href: /fr/index.html
+        text: Accueil
+      - href: /fr/projects.html
+        text: Projets
+      - href: /fr/method.html
+        text: Démarche
+      - href: /fr/cv.html
+        text: CV
+      - href: /fr/contact.html
+        text: Contact
+    right:
+      - text: English
+        href: /en/
+
+format:
+  html:
+    lang: fr-FR
+    output-dir: fr

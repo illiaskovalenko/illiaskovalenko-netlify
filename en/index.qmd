@@ -1,0 +1,50 @@
+---
+title: "Data Analysis and Decision Support"
+---
+::: {.columns .align-items-center}
+
+::: {.column width="65%"}
+
+::: {.callout-note title="About me"}
+::: {.hero-text}
+PhD candidate in humanities and social sciences transitioning into data analysis
+:::
+*#data, #analysis, #insight*
+:::
+:::
+
+::: {.column width="35%"}
+
+![](/images/profile.jpg){.profile-photo}
+
+:::
+
+:::
+
+## Who I Am
+
+Joint PhD candidate (EPHE-PSL / UCLouvain), I develop expertise in the structured analysis of complex data.
+
+My profile stands out through a methodological approach: I do not focus on tools alone, but on building rigorous, interpretable, and decision-oriented analyses.
+
+I am transitioning into data analysis with a central motivation:  
+to extract meaning from complex data by identifying relationships, patterns, and underlying structures.
+
+I place particular emphasis on translating these results — through structuring, visualization, and storytelling — to make them immediately understandable and actionable.
+
+---
+
+## What I Can Bring
+
+- Structuring and clarifying complex problems  
+- Data cleaning, transformation, and reliability  
+- Rigorous analysis grounded in statistical methods  
+- Data visualization and storytelling  
+- Translating analyses into insights understandable by non-technical stakeholders  
+- Bridging the gap between data and teams to support decision-making  
+
+---
+
+## Explore
+
+[Projects](projects.qmd) · [Approach](method.qmd) · [CV](cv.qmd) · [Contact](contact.qmd)

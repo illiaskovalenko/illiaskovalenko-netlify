@@ -1,0 +1,39 @@
+---
+title: "Me contacter"
+---
+
+Je suis ouvert aux opportunités en analyse de données et *business analysis* (alternance 2 ans).
+
+---
+
+## Coordonnées
+
+::: {.columns}
+
+::: {.column width="50%"}
+
+🔗 **LinkedIn**  
+[illiakovalenko](https://www.linkedin.com/in/illiakovalenko){target="_blank"}
+
+💻 **GitHub**  
+[illiaskovalenko](https://github.com/illiaskovalenko){target="_blank"}
+
+:::
+
+::: {.column width="50%"}
+
+✉️ **Email**  
+[illiaskovalenko@gmail.com](mailto:illiaskovalenko@gmail.com)
+
+📍 **Localisation**  
+Paris / Île-de-France
+
+:::
+
+:::
+
+---
+
+## Références
+
+Lettres de recommandation disponibles sur demande.

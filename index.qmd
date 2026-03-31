@@ -1,0 +1,43 @@
+---
+title: ""
+toc: false
+page-layout: full
+---
+
+::: {.landing-hero}
+::: {.landing-card}
+
+::: {.landing-brand}
+
+![](images/ik-logo-transparent.png){.landing-logo width=110}
+
+::: {.landing-name}
+Illia Kovalenko
+:::
+
+::: {.landing-tagline}
+Portfolio | Data Analytics
+:::
+:::
+
+---
+
+::: {.landing-title}
+Language Choice / Choix de la langue
+:::
+
+::: {.landing-hint}
+Select a language to continue / Sélectionnez une langue pour continuer.
+:::
+
+::: {.landing-actions}
+[English](en/index.html){.landing-btn .landing-btn-outline}
+[Français](fr/index.html){.landing-btn .landing-btn-outline}
+:::
+
+::: {.landing-foot}
+EPHE-PSL / UCLouvain • Paris / Bruxelles • [About](about.qmd)
+:::
+
+:::
+:::

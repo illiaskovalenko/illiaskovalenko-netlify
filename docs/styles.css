@@ -1,0 +1,186 @@
+/* css styles */
+.profile-photo {
+  border-radius: 50%;
+  width: 190px;
+  display: block;
+  margin: 20px;
+}
+
+.hero-text {
+  font-size: 1.3rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 1.35;
+  margin: 0.2rem 0;
+}
+
+.callout-note .callout-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
+/* =========================
+   Landing (root index) styles
+   ========================= */
+  /* Layout */
+  .landing-hero{
+    min-height: calc(100vh - 2rem);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 3.5rem 1.5rem;
+    background:
+      radial-gradient(1200px 600px at 60% 0%, var(--oc-primary-weak), rgba(255,255,255,0)),
+      linear-gradient(180deg, var(--oc-paper), #FBF7EF);
+  }
+  
+  .landing-card{
+    width: min(920px, 100%);
+    padding: 2.6rem 2.4rem;
+    border: 1px solid rgba(0,0,0,.08);
+    border-radius: 18px;
+    background: #fff;
+    box-shadow: 0 14px 44px rgba(0,0,0,.10);
+  }
+  
+  /* Typo */
+  .landing-name{
+    font-size: 2.6rem;
+    font-weight: 780;
+    line-height: 1.05;
+    margin-bottom: .25rem;
+    color: var(--oc-ink);
+  }
+  
+  .landing-tagline{
+    font-size: 1.08rem;
+    opacity: .78;
+    color: var(--oc-ink);
+  }
+  
+  .landing-logo{
+    display: block;
+    width: 110px;
+    height: auto;
+    margin: 0 auto 1.2rem auto;
+  }
+
+  .landing-title{
+    font-size: 1.25rem;
+    font-weight: 680;
+    margin-top: .9rem;
+    margin-bottom: .75rem;
+    color: var(--oc-ink);
+  }
+
+  .landing-hint{ 
+    opacity: .72; 
+    margin-top: -.25rem; 
+    margin-bottom: .75rem;
+  }
+  
+  .landing-foot{
+    margin-top: 2rem;
+    font-size: .98rem;
+    opacity: .72;
+    color: var(--oc-ink);
+  }
+  
+  /* Buttons (forced, stable) */
+  .landing-actions{
+    display: flex;
+    justify-content: center;
+    gap: 1.2rem;
+    flex-wrap: wrap;
+    margin-top: .75rem;
+  }
+  
+  /* On cible directement les <a> pour éviter tout conflit Quarto/Bootstrap */
+  .landing-actions a{
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  
+    min-width: 170px;
+    padding: .95rem 1.7rem;
+    border-radius: 16px;
+  
+    text-decoration: none !important;
+    font-weight: 700;
+    font-size: 1rem;
+  
+    background: var(--oc-primary);
+    border: 1px solid var(--oc-primary);
+    color: #ffffff !important;
+  
+    transition: transform .12s ease, box-shadow .14s ease, background-color .14s ease, border-color .14s ease;
+  }
+
+  .landing-actions a:hover{
+    transform: translateY(-2px);
+    box-shadow: 0 12px 26px rgba(0,0,0,.14);
+    background: color-mix(in srgb, var(--oc-primary) 86%, black);
+    border-color: color-mix(in srgb, var(--oc-primary) 86%, black);
+  }
+  
+  /* Accessibilité : focus clavier visible */
+  .landing-actions a:focus-visible{
+    outline: 3px solid color-mix(in srgb, var(--oc-primary) 35%, white);
+    outline-offset: 3px;
+  } 
+
+/* Force landing button colors (no dependency on Bootstrap vars) */
+.landing-btn{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 170px;
+  padding: .95rem 1.7rem;
+  border-radius: 16px;
+  text-decoration: none !important;
+  font-weight: 700;
+}
+
+.landing-btn-primary{
+  background: #7D47F4 !important;
+  border: 1px solid #7D47F4 !important;
+  color: #ffffff !important;
+}
+
+.landing-btn-primary:visited{
+  color: #ffffff !important;
+}
+
+.landing-btn-primary:hover{
+  background: #6B3FE0 !important;
+  border-color: #6B3FE0 !important;
+}
+
+/* Hard override for landing buttons (wins over theme) */
+.landing-actions a.landing-btn{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 150px;
+  padding: .85rem 1.45rem;
+  border-radius: 16px;
+
+  background: #7D47F4 !important;
+  border: 1px solid #7D47F4 !important;
+  color: #ffffff !important;
+
+  text-decoration: none !important;
+  font-weight: 700;
+}
+
+.landing-actions a.landing-btn:visited{
+  color: #ffffff !important;
+}
+
+.landing-actions a.landing-btn:hover{
+  background: #6B3FE0 !important;
+  border-color: #6B3FE0 !important;
+}

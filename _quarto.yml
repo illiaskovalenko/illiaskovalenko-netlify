@@ -1,0 +1,24 @@
+project:
+  type: website
+  output-dir: docs
+  resources:
+    - js
+
+profile:
+  group:
+    - [def, en, fr]
+
+format:
+  html:
+    theme:
+      - cosmo
+      - brand
+    toc: true
+    mainfont: serif
+    css: styles.css
+    include-in-header:
+      - text: |
+          <script defer src="/js/lang-switch.js"></script>
+
+
+
