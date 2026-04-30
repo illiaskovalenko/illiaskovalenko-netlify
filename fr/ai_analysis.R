@@ -552,3 +552,16 @@ cluster_profiles
 # Interpretation:
 # Clusters are balanced but weakly differentiated.
 # The clustering does not reveal strong behavioral profiles.
+
+model_cluster_gpa <- lm(
+  GPA_Post_AI ~ GPA_Baseline +
+    cluster +
+    Primary_AI_Tool +
+    Task_Frequency_Daily +
+    Main_Usage_Case +
+    Time_Saved_Hours_Weekly,
+  data = tbl_database
+)
+
+summary(model_cluster_gpa)
+tidy(model_cluster_gpa)
