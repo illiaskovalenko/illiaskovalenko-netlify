@@ -56,7 +56,7 @@ As a result, the analysis should be interpreted as an exploratory exercise focus
 
 ---
 
-## Data loading and preparation {#sec-data-preparation}
+## Data loading and preparation (character variables -> factors) {#sec-data-preparation}
 
 ```{r}
 library(tidyverse)
@@ -67,7 +67,6 @@ library(stats)
 tbl_database <- read_csv("database.csv")
 
 glimpse(tbl_database)
-summary(tbl_database)
 any(is.na(tbl_database))
 
 tbl_database <- tbl_database |>
@@ -75,6 +74,982 @@ tbl_database <- tbl_database |>
     across(where(is.character) & !contains("ID"), as.factor),
     gpa_diff = GPA_Post_AI - GPA_Baseline
   )
+
+summary(tbl_database)
 ```
 
 The dataset contains 1,500 observations and no missing values. Character variables were converted into factors, and a new variable, `gpa_diff`, was created to measure the difference between post-AI GPA and baseline GPA.
+
+---
+
+## GPA change: descriptive analysis {#sec-gpa-descriptive}
+
+The first step is descriptive. The summaries provided contain all the basic descriptive statistics. However, before modeling any relationship, I examine whether the dataset contains an observable GPA difference after AI usage.
+
+```{r}
+gpa_summary <- tbl_database |>
+  summarise(
+    min = min(gpa_diff),
+    median = median(gpa_diff),
+    mean = mean(gpa_diff),
+    sd = sd(gpa_diff),
+    max = max(gpa_diff)
+  )
+
+gpa_summary
+```
+
+The average GPA difference is positive, with a mean increase of approximately +0.088 GPA points.
+
+In a different way, these descriptive statistics can be read and compared quickly via a boxplot.
+
+```{r}
+plot_gpa_diff <- tbl_database |>
+  ggplot(aes(x = "", y = gpa_diff)) +
+  geom_boxplot(fill = "#4C78A8", color = "black", alpha = 0.7) +
+  geom_point(color = "black", size = 0.08) +
+  labs(
+    title = "Statistical distribution of GPA scores' difference",
+    x = "",
+    y = "GPA difference"
+  ) +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(hjust = 0.5, face = "bold")
+  )
+
+plot_gpa_diff
+```
+
+Grouped summaries show small differences in GPA scores across majors, tools, and usage cases.
+
+```{r}
+gpa_by_major <- tbl_database |>
+  summarise(
+    min = min(gpa_diff),
+    median = median(gpa_diff),
+    mean = mean(gpa_diff),
+    sd = sd(gpa_diff),
+    max = max(gpa_diff),
+    .by = Major
+  ) |>
+  arrange(desc(mean))
+
+gpa_by_tool <- tbl_database |>
+  summarise(
+    min = min(gpa_diff),
+    median = median(gpa_diff),
+    mean = mean(gpa_diff),
+    max = max(gpa_diff),
+    .by = Primary_AI_Tool
+  ) |>
+  arrange(desc(mean))
+
+gpa_by_usage <- tbl_database |>
+  summarise(
+    min = min(gpa_diff),
+    median = median(gpa_diff),
+    mean = mean(gpa_diff),
+    max = max(gpa_diff),
+    .by = Main_Usage_Case
+  ) |>
+  arrange(desc(mean))
+
+gpa_by_major
+gpa_by_tool
+gpa_by_usage
+```
+
+At this stage, the descriptive statistics suggest a small positive GPA shift, but they do not stipulate that this change is statistically significant and do not explain what drives this change.
+
+Another way to visualise the GPA difference, is to construct a scatter plot, where all the points above the line `y = x` represent students' improvement.
+
+```{r}
+plot_gpa_scatter <- tbl_database |>
+  ggplot(aes(x = GPA_Baseline, y = GPA_Post_AI)) +
+  geom_jitter(
+    width = 0.02,
+    height = 0.2,
+    alpha = 0.9,
+    size = 0.01,
+    color = "#4C78A8"
+  ) +
+  geom_abline(slope = 1, intercept = 0, linetype = "dashed", color = "red") +
+  labs(
+    title = "GPA Before vs After AI Usage",
+    subtitle = "Points above the line indicate improvement",
+    x = "Baseline GPA",
+    y = "Post-AI GPA"
+  ) +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(hjust = 0.5, face = "bold"),
+    plot.subtitle = element_text(hjust = 0.5, face = "italic")
+  )
+
+plot_gpa_scatter
+```
+
+---
+
+## GPA difference distribution {#sec-gpa-distribution}
+
+Before using statistical tests, the distribution of the paired differences must be inspected. For a paired t-test, the normality assumption applies to the difference, not to the two GPA variables separately.
+
+The most basic way to proceed with our assumption verification, is to construct a normal Q-Q plot.
+
+```{r}
+qqnorm(tbl_database$gpa_diff)
+qqline(tbl_database$gpa_diff, col = "red")
+```
+
+For a better visual representation, we shall construct a histogram of the `gpa_diff` as well.
+
+```{r}
+plot_gpa_hist <- tbl_database |>
+  ggplot(aes(x = gpa_diff)) +
+  geom_histogram(fill = "#4C78A8", alpha = 0.7, bins = 30) +
+  labs(
+    title = "Distribution of GPA Difference",
+    x = "GPA_Post_AI - GPA_Baseline",
+    y = "Count"
+  ) +
+  theme_minimal() +
+  theme(plot.title = element_text(hjust = 0.5, face = "bold"))
+
+plot_gpa_hist
+```
+
+The distribution is discretized, most likely due to rounding effects in GPA values: a GPA score in the present dataset is systematically rounded up. 
+
+This limits strict normality, but the sample size (=1500) is large enough for the **paired t-test** to remain robust. A non-parametric **Wilcoxon signed-rank test** is also used as a robustness check in @sec-gpa-tests.
+
+---
+
+## GPA statistical testing {#sec-gpa-tests}
+
+The first inferential question is deliberately simple: **do students report a higher GPA after AI usage than before?**
+
+::: {.callout-tip title="Statistical test: paired t-test"}
+**Research question**
+
+Is post-AI GPA significantly different from baseline GPA?
+
+**Null hypothesis (H0)**
+
+There is no mean difference between baseline GPA and post-AI GPA.
+
+**Alternative hypothesis (H1)**
+
+There is a mean difference between baseline GPA and post-AI GPA.
+
+**Method**
+
+A paired t-test is used because both GPA measures are observed for the same students.
+
+**Assumptions**
+
+The key normality assumption applies to the paired differences. As shown in @sec-gpa-distribution, the difference is discretized and not perfectly normal. However, given the large sample size, the paired t-test should remain robust.
+:::
+
+```{r}
+t_test <- t.test(
+  tbl_database$GPA_Post_AI,tbl_database$GPA_Baseline,
+  paired = TRUE
+)
+
+tidy(t_test)
+```
+
+The paired t-test is complemented with a non-parametric test because the GPA difference distribution is discretized.
+
+::: {.callout-tip title="Robustness check: Wilcoxon signed-rank test"}
+**Null hypothesis (H0)**
+
+The median paired difference is equal to zero.
+
+**Alternative hypothesis (H1)**
+
+The median paired difference is not equal to zero.
+
+**Method**
+
+The Wilcoxon signed-rank test ranks the absolute paired differences and checks whether positive and negative ranks are balanced.
+
+**Reason for use**
+
+This test is less sensitive to deviations from normality and is appropriate as a robustness check after the diagnostic findings in @sec-gpa-distribution.
+:::
+
+```{r}
+wilcox_test <- wilcox.test(
+  tbl_database$GPA_Post_AI,
+  tbl_database$GPA_Baseline,
+  paired = TRUE
+)
+
+tidy(wilcox_test)
+```
+
+Both tests indicate a statistically significant (`p ≈ 0`) GPA increase after AI usage. Positive differences dominate negative ones across observations. In other terms, students tend to improve more often than they decline. However, the magnitude of the average change remains modest. 
+
+Our next step is to test whether AI usage variables actually explain this change.
+
+---
+
+## Modeling GPA outcomes {#sec-gpa-models}
+
+The statistical tests show that GPA increases on average. The modeling stage asks a different question: **can AI usage variables explain variation in GPA outcomes?**
+
+---
+
+### Naive model: GPA difference explained by AI usage
+
+::: {.callout-tip title="Model 1: OLS model on GPA difference"}
+**Research question**
+
+Do AI usage variables explain GPA change?
+
+**Dependent variable**
+
+`gpa_diff = GPA_Post_AI - GPA_Baseline`
+
+**Null hypothesis (H0)**
+
+AI usage variables have no association with GPA change.
+
+**Alternative hypothesis (H1)**
+
+At least one AI usage variable is associated with GPA change.
+
+**Method**
+
+OLS regression is used as a first explanatory model.
+
+**Assumptions and diagnostics**
+
+Residual diagnostics are inspected after model estimation. As discussed in @sec-gpa-distribution, the dependent variable is discretized, so the model is treated as exploratory rather than definitive in terms of impact analysis.
+:::
+
+```{r}
+model_gpa_diff <- lm(
+  gpa_diff ~ Primary_AI_Tool +
+    Task_Frequency_Daily +
+    Main_Usage_Case +
+    Time_Saved_Hours_Weekly,
+  data = tbl_database
+)
+
+summary(model_gpa_diff)
+tidy(model_gpa_diff)
+
+plot(model_gpa_diff, which = 1)
+```
+
+The model has almost no explanatory power (adjusted R-squared < 1%, p-value is > 0.8).
+
+AI tool, usage frequency, usage case, and time saved do not meaningfully explain GPA change (the coefficients are extremely small and insignificant). 
+
+The residual plot shows horizontal bands, confirming the discretized structure of the dependent variable.
+
+In order to solve any issues related to the form of the dependent variable (`GPA_Post_AI - GPA_Baseline`), and to futher control interpersonal variations,  we decided to use in the next model the original GPA scores, with `GPA_Post_AI` being the new dependent variable.
+
+---
+
+### Adjusted model: post-AI GPA controlled by baseline GPA
+
+::: {.callout-important title="Why baseline GPA must be controlled"}
+The previous model ignores the starting academic level of each student. This is problematic because GPA is bounded: students with a high baseline GPA have less room to improve.
+
+To account for this ceiling effect, post-AI GPA is modeled while controlling for baseline GPA.
+:::
+
+```{r}
+model_gpa_post <- lm(
+  GPA_Post_AI ~ GPA_Baseline +
+    Primary_AI_Tool +
+    Task_Frequency_Daily +
+    Main_Usage_Case +
+    Time_Saved_Hours_Weekly,
+  data = tbl_database
+)
+
+summary(model_gpa_post)
+tidy(model_gpa_post)
+
+plot(model_gpa_post, which = 1)
+```
+
+This model explains approximately **91% of the variance** in post-AI GPA. However, this explanatory power comes almost entirely from baseline GPA. AI-related variables remain non-significant.
+
+The residual structure shows discretization and a ceiling effect near the maximum GPA value.
+
+---
+
+### Extended model: adding `Age` and `Major`
+
+::: {.callout-tip title="Socio-demographic controls"}
+**Research question**
+
+Do age and major improve the explanatory model?
+
+**Method**
+
+The adjusted GPA model is extended with `Age` and `Major`.
+
+**Interpretation strategy**
+
+This model tests whether socio-demographic variables add meaningful explanatory power beyond baseline GPA and AI usage variables.
+:::
+
+```{r}
+model_gpa_post_extended <- lm(
+  GPA_Post_AI ~ GPA_Baseline +
+    Age +
+    Major +
+    Primary_AI_Tool +
+    Task_Frequency_Daily +
+    Main_Usage_Case +
+    Time_Saved_Hours_Weekly,
+  data = tbl_database
+)
+
+summary(model_gpa_post_extended)
+tidy(model_gpa_post_extended)
+```
+
+Adding age and major does not substantially improve the model. Baseline GPA remains the dominant predictor. Other effects (notably, of some majors) are weak and should not be overinterpreted without further evidence.
+
+---
+
+### Logistic model: probability of GPA improvement
+
+::: {.callout-tip title="Alternative specification: binary improvement model"}
+
+Because `gpa_diff` is a discrete variable, a binary model can be used as a complementary specification.
+
+**New dependent variable**
+`gpa_improved`= 1 if `gpa_diff` > 0, otherwise 0.
+
+**Research question**
+Which variables predict whether a student improves their GPA?
+
+**Method**
+Logistic regression is used to model the probability of improvement.
+
+**Interpretation**
+Coefficients are transformed into odds ratios for readability.
+:::
+
+```{r}
+tbl_database <- tbl_database |>
+  mutate(gpa_improved = as.integer(gpa_diff > 0))
+
+model_gpa_improved <- glm(
+  gpa_improved ~ GPA_Baseline +
+    Age +
+    Major +
+    Primary_AI_Tool +
+    Task_Frequency_Daily +
+    Main_Usage_Case +
+    Time_Saved_Hours_Weekly,
+  data = tbl_database,
+  family = binomial
+)
+
+summary(model_gpa_improved)
+
+gpa_improved_results <- tidy(model_gpa_improved) |>
+  mutate(
+    odds_ratio = exp(estimate)
+  )
+
+gpa_improved_results
+```
+
+The logistic model does not reveal robust predictors of GPA improvement. Fine Arts students show lower odds of improvement compared with Biology students (33%, with p-value = 0.02), but this isolated effect should be interpreted cautiously.
+
+---
+
+## Career confidence {#sec-career-confidence}
+
+Let's turn to a different kind of outcome: career confidence. This variable does not measure academic performance directly. Instead, it captures a subjective perception of future readiness for career.
+
+## Correlations with GPA metrics
+
+::: {.callout-tip title="Correlation analysis"}
+**Research question**
+
+Is career confidence associated with GPA baseline, post-AI GPA, or GPA change?
+
+**Methods**
+
+*Pearson* correlations are used for linear relationships. *Spearman* and *Kendall* correlations are added as robustness checks because both GPA and confidence scores are discrete variables.
+
+**Interpretation**
+
+If all correlations remain close to zero, there is no meaningful continuous or monotonic relationship to report.
+:::
+
+```{r}
+career_gpa_cor_pearson <- tbl_database |>
+  summarise(
+    cor_baseline = cor(GPA_Baseline, Career_Confidence_Score),
+    cor_post = cor(GPA_Post_AI, Career_Confidence_Score),
+    cor_diff = cor(gpa_diff, Career_Confidence_Score)
+  )
+
+career_gpa_cor_spearman <- tibble(
+  variable = c("GPA_Baseline", "GPA_Post_AI", "gpa_diff"),
+  correlation = c(
+    cor(tbl_database$GPA_Baseline, tbl_database$Career_Confidence_Score, method = "spearman"),
+    cor(tbl_database$GPA_Post_AI, tbl_database$Career_Confidence_Score, method = "spearman"),
+    cor(tbl_database$gpa_diff, tbl_database$Career_Confidence_Score, method = "spearman")
+  )
+)
+
+career_gpa_cor_kendall <- cor(
+  tbl_database$gpa_diff,
+  tbl_database$Career_Confidence_Score,
+  method = "kendall"
+)
+
+career_by_gpa_improvement <- tbl_database |>
+  group_by(gpa_improved) |>
+  summarise(mean_confidence = mean(Career_Confidence_Score))
+
+career_gpa_cor_pearson
+career_gpa_cor_spearman
+career_gpa_cor_kendall
+career_by_gpa_improvement
+```
+
+Pearson, Spearman, and Kendall correlations are all close to zero (<0.03). Career confidence is therefore not meaningfully associated with baseline GPA, post-AI GPA, or GPA change.
+
+Students who improved their GPA have slightly higher average confidence (`5.53` vs. `5.25`, a difference of 0.28 points), but the impact is very modest.
+
+### Distribution of career confidence
+
+```{r}
+qqnorm(tbl_database$Career_Confidence_Score)
+qqline(tbl_database$Career_Confidence_Score, col = "red")
+
+plot_career_confidence_hist <- tbl_database |>
+  ggplot(aes(x = Career_Confidence_Score)) +
+  geom_histogram(fill = "#4C78A8", color = "black", alpha = 0.7) +
+  labs(
+    title = "Histogram of Career Confidence Score",
+    x = "Scores",
+    y = "Number of occurences"
+  ) +
+  theme_minimal(base_size = 14) +
+  theme(
+    plot.title = element_text(hjust = 0.5, face = "bold")
+  )
+
+plot_career_confidence_hist
+```
+
+Career confidence is evidently a discrete variable evenly distributed, suggesting limited internal structure to exploit for analysis purposes.
+
+### Career confidence model
+
+::: {.callout-tip title="OLS model on career confidence"}
+
+**Research question**
+
+Can GPA, AI usage variables, age, and major explain career confidence?
+
+**Dependent variable**
+
+`Career_Confidence_Score`
+
+**Method**
+
+OLS regression is used as an approximation. Although the variable is discrete, it has ten levels, which allows a simple exploratory linear model.
+
+**Interpretation**
+
+The model is evaluated globally using the F-test and R², not only individual p-values.
+:::
+
+```{r}
+model_career_confidence <- lm(
+  Career_Confidence_Score ~ GPA_Post_AI +
+    Age +
+    Major +
+    Primary_AI_Tool +
+    Task_Frequency_Daily +
+    Main_Usage_Case +
+    Time_Saved_Hours_Weekly,
+  data = tbl_database
+)
+
+summary(model_career_confidence)
+tidy(model_career_confidence)
+```
+
+The model is not globally significant and explains only a very small share of variance. Some major-level effects appear, but they should not be overinterpreted.
+
+---
+
+## AI usage and adoption {#sec-ai-usage}
+
+At this point, our analysis changes direction. Instead of asking whether AI usage affects outcomes, I test whether baseline academic performance predicts AI usage.
+
+::: {.callout-tip title="Inverted model: who uses AI more frequently?"}
+**Research question**
+
+Do students with lower baseline GPA use AI more frequently?
+
+**Null hypothesis (H0)**
+
+Baseline GPA, age, and major do not predict AI usage frequency.
+
+**Alternative hypothesis (H1)**
+
+At least one of these variables predicts AI usage frequency.
+
+**Method**
+
+OLS regression is used with `Task_Frequency_Daily` as the dependent variable.
+:::
+
+```{r}
+model_usage_from_gpa <- lm(
+  Task_Frequency_Daily ~ GPA_Baseline + Age + Major,
+  data = tbl_database
+)
+
+summary(model_usage_from_gpa)
+tidy(model_usage_from_gpa)
+```
+
+There is no evidence that baseline GPA predicts AI usage frequency.
+
+::: {.callout-tip title="Binary high-usage model"}
+
+A binary version of AI usage is also tested.
+
+Students above the median frequency of daily AI use are classified as high users.
+:::
+
+```{r}
+tbl_database <- tbl_database |>
+  mutate(high_usage = Task_Frequency_Daily > median(Task_Frequency_Daily))
+
+model_high_usage <- glm(
+  high_usage ~ GPA_Baseline + Age + Major,
+  data = tbl_database,
+  family = binomial
+)
+
+summary(model_high_usage)
+tidy(model_high_usage)
+```
+
+The binary model confirms the same result: high AI usage is not meaningfully predicted by GPA, age, or major.
+
+---
+
+## Ethical concerns {#sec-ethics}
+
+Ethical concern is an ordinal variable. Therefore, an ordered logistic regression is more appropriate than a standard linear model.
+
+::: {.callout-tip title="Ordered logistic regression"}
+**Research question**
+
+Are ethical concerns structured by AI usage behavior?
+
+**Dependent variable**
+
+`AI_Ethics_Concern`
+
+**Method**
+
+An ordered logistic regression is used because ethical concern has ordered categories.
+
+**Interpretation**
+
+Odds ratios greater than 1 indicate higher odds of being in a higher concern category. Odds ratios below 1 indicate lower odds.
+:::
+
+```{r}
+model_ethics_concern <- polr(
+  AI_Ethics_Concern ~ Primary_AI_Tool +
+    Task_Frequency_Daily +
+    Main_Usage_Case +
+    Time_Saved_Hours_Weekly +
+    Age +
+    Major,
+  data = tbl_database,
+  Hess = TRUE
+)
+
+ethics_concern_results <- tidy(model_ethics_concern) |>
+  mutate(
+    p_value = 2 * pnorm(-abs(statistic)),
+    odds_ratio = exp(estimate)
+  )
+
+model_ethics_concern
+ethics_concern_results
+```
+
+Daily AI usage shows a weak negative association with ethical concern. The odds ratio is approximately `0.97`, suggesting a small decrease in the probability (`3%`) of reporting higher ethical concern as usage frequency increases.
+
+This **effect of familiarity** is statistically detectable but small. Overall, ethical concern is not strongly structured by AI tool, usage case, time saved, age, or major.
+
+---
+
+## Time saved {#sec-time-saved}
+
+Time saved is intuitively expected to be the variable most directly connected to AI usage. This makes it an important test case.
+
+```{r}
+qqnorm(tbl_database$Time_Saved_Hours_Weekly)
+qqline(tbl_database$Time_Saved_Hours_Weekly, col = "red")
+
+plot_time_saved_hist <- tbl_database |>
+  ggplot(aes(x = Time_Saved_Hours_Weekly)) +
+  geom_histogram(fill = "#4C78A8", color = "black", alpha = 0.7) +
+  labs(
+    title = "Histogram of Time Saved Weekly",
+    x = "Hours",
+    y = "Number of occurences"
+  ) +
+  theme_minimal(base_size = 14) +
+  theme(
+    plot.title = element_text(hjust = 0.5, face = "bold")
+  )
+
+plot_time_saved_hist
+```
+
+::: {.callout-tip title="OLS model on time saved"}
+**Research question**
+
+Which variables explain perceived weekly time saved?
+
+**Dependent variable**
+
+`Time_Saved_Hours_Weekly`
+
+**Method**
+
+OLS regression is used to test whether usage frequency, usage case, AI tool, GPA, age, or major explain time saved.
+:::
+
+```{r}
+model_time_saved <- lm(
+  Time_Saved_Hours_Weekly ~ Task_Frequency_Daily +
+    Main_Usage_Case +
+    Primary_AI_Tool +
+    GPA_Baseline +
+    Age +
+    Major,
+  data = tbl_database
+)
+
+summary(model_time_saved)
+tidy(model_time_saved)
+```
+
+The model does not identify meaningful predictors of weekly time saved. This is notable because time saved is intuitively expected to be linked to usage frequency, but the data does not support that relationship.
+
+There are two possible explanations for these results: either the self-reported measurement are biased, or the dataset has been constructed artificially with no relationship whatsoever to the field observations.
+
+---
+
+## Clustering and segmentation {#sec-clustering}
+
+Rather than testing linear relationships only, the final step of the analysis explores whether latent profiles of students emerge from the joint distribution of academic performance, AI usage, and perceived outcomes.
+
+::: {.callout-tip title="K-means clustering"}
+**Research question**
+
+Can students be grouped into distinct profiles combining academic performance, AI usage, and perceived outcomes?
+
+**Method**
+
+K-means clustering is applied to standardized numerical variables.
+
+**Variables used**
+
+- `Task_Frequency_Daily`
+- `Time_Saved_Hours_Weekly`
+- `Career_Confidence_Score`
+- `GPA_Baseline`
+- `gpa_diff`.
+
+**Reason for scaling**
+
+Variables are measured on different scales. Standardization ensures that each variable contributes equally to the clustering algorithm.
+
+**Important limitation**
+
+Because GPA variables are included in the clustering process, the resulting clusters partially reflect outcome structure. They must therefore be interpreted as descriptive profiles, not causal groups.
+:::
+
+```{r}
+clustering_data <- tbl_database |>
+  dplyr::select(
+    Task_Frequency_Daily,
+    Time_Saved_Hours_Weekly,
+    Career_Confidence_Score,
+    GPA_Baseline,
+    gpa_diff
+  ) |>
+  scale()
+
+set.seed(1999)
+
+kmeans_model <- kmeans(
+  clustering_data,
+  centers = 3,
+  nstart = 25
+)
+
+tbl_database$cluster <- factor(kmeans_model$cluster)
+
+cluster_counts <- table(tbl_database$cluster)
+cluster_proportions <- prop.table(table(tbl_database$cluster))
+
+cluster_profiles <- tbl_database |>
+  group_by(cluster) |>
+  summarise(
+    n = n(),
+    mean_usage = mean(Task_Frequency_Daily),
+    mean_time_saved = mean(Time_Saved_Hours_Weekly),
+    mean_confidence = mean(Career_Confidence_Score),
+    mean_gpa_baseline = mean(GPA_Baseline),
+    mean_gpa_diff = mean(gpa_diff)
+  )
+
+cluster_counts
+cluster_proportions
+print(cluster_profiles, width = Inf)
+```
+
+The algorithm produces three balanced groups:
+
+- Cluster 1: 534 observations (`~35.6%`)
+- Cluster 2: 540 observations (`~36.0%`)
+- Cluster 3: 426 observations (`~28.4%`)
+
+The distribution suggests no dominant group and indicates a relatively homogeneous partitioning of the dataset.
+
+K-means clustering produces balanced groups, but the profiles are only weakly differentiated. The main differences come from GPA baseline and GPA difference rather than from AI usage behavior.
+
+1. Cluster 1 — “improvers”
+
+- average GPA (3.07)
+- strong GPA gain (+0.23)
+- most active users (5.57 tasks run daily)
+- highest time saved (9.24 hours per week)
+- highest confidence (5.62)
+
+Students in this group exhibit the strongest performance gains. Their intermediate baseline level suggests sufficient skills to leverage AI outputs effectively, combined with a substantial margin for improvement.
+
+AI usage appears here as a **complementary resource**, supporting learning and performance.
+
+2. Cluster 2 — “high baseline, stable”
+
+- high baseline GPA (3.71)
+- low gain (+0.04)
+- the lowest daily usage (5.21 tasks per day)
+- average time saved (8.55 hours per week)
+- average confidence score (5.46)
+
+These students are already near the upper bound of the GPA scale. The limited improvement is consistent with a **ceiling effect**, which mechanically restricts potential gains.
+
+AI usage appears more **selective and marginal**, with limited observable impact on outcomes.
+
+3. Cluster 3 — “low performers, low gains”
+
+- low baseline GPA (2.92)
+- slight decline (negative gpa_diff of -0.02)
+- average usage frequency (5.46 tasks per day)
+- less time saved (7.54 hours per week)
+- lower confidence score (5.11)
+
+Despite comparable usage levels, this group does not benefit from AI. The absence of gains suggests a **misalignment between tool usage and underlying skills**.
+
+AI may function here as a **substitute rather than an augmentation mechanism**, leading to limited or even negative outcomes.
+
+**Otherwise stated:**
+
+The students with average baseline GPA score gained the most from AI usage, both on GPA and career confidence score, being the most active users and saving more time than the two other groups. Therefore, they are called "improvers".
+
+The students with higher baseline GPA gained very little from AI usage, their engagement with AI tools being generally moderate if not lower than in other groups.
+
+However, students with lower GPA baseline score did not gain anything from AI tools if not the lowest career confidence score and worse GPA results. They use AI tools almost as frequently as "improvers", but they gain less from the tools than any other group.
+
+## Cluster integration into GPA model {#sec-clustering-ols}
+
+To test whether these latent profiles capture additional variation in academic outcomes, cluster membership is introduced into the GPA model.
+
+::: {.callout-tip title="Cluster-based regression: interpretation caution"}
+
+**Objective**
+
+Assess whether cluster membership explains variation in post-AI GPA beyond baseline GPA and observed variables.
+
+**Important limitation**
+
+Clusters are constructed using variables directly related to GPA outcomes. Therefore, their effect in regression models reflects latent structure already present in the data, not an independent causal mechanism.
+:::
+
+```{r}
+model_cluster_gpa <- lm(
+  GPA_Post_AI ~ GPA_Baseline +
+    cluster +
+    Primary_AI_Tool +
+    Task_Frequency_Daily +
+    Main_Usage_Case +
+    Time_Saved_Hours_Weekly,
+  data = tbl_database
+)
+
+summary(model_cluster_gpa)
+tidy(model_cluster_gpa)
+```
+
+The model shows extremely high explanatory power (R² ≈ 0.97), driven almost entirely by baseline GPA.
+
+- `GPA_Baseline ≈ 1.01` → near-perfect persistence
+- AI usage variables → non-significant
+- `Time_Saved_Hours_Weekly` → small negative effect
+
+**Cluster effects:**
+
+- Cluster 2 "high GPA baseline": `−0.20` GPA points (vs cluster 1 "improvers")
+- Cluster 3 "low GPA baseline": `−0.26` GPA points (vs cluster 1 "improvers")
+
+Holding baseline GPA constant, **cluster membership** remains strongly associated with outcomes.
+
+Cluster effects capture residual performance differences not explained by observed variables. However, because clusters are partially constructed from GPA-related variables, these effects should be interpreted as **latent performance regimes, not causal drivers**.
+
+`Time_Saved_Hours_Weekly` has a coefficient of -0.00315 (p < 0.001). Higher reported time savings may result in slightly lower GPA, the baseline GPA and clustering being controlled for. The magnitude of the impact is small, but statistically clear. The influence might be a result of a latent **substitution effect* (students saving time may reduce effort); over-reliance; or efficiency replacing deep processing and deep learning. 
+
+---
+
+## Main results {#sec-main-results}
+
+The analysis produces several consistent findings across descriptive statistics, hypothesis testing, modeling, and clustering.
+
+**1. Strong persistence of academic performance**
+
+Post-AI GPA is almost entirely determined by baseline GPA. Across all models, prior performance explains the overwhelming majority of variance, indicating a highly stable academic structure.
+
+**2. No measurable effect of AI usage variables**
+
+AI-related variables — tool, usage frequency, usage case, and time saved — do not meaningfully explain academic outcomes.
+
+This result is robust across:
+
+- OLS models
+- logistic models
+- correlation analysis
+
+AI usage intensity does not translate into measurable GPA differences.
+
+**3. Negative association between time saved and performance**
+
+Time saved is the only AI-related variable showing a statistically significant effect in the final model, with a small negative coefficient.
+
+This suggests that perceived efficiency gains may not correspond to improved learning outcomes.
+
+**4. Weak structure of subjective variables**
+
+Career confidence and ethical concerns are only weakly connected to both GPA and AI usage variables.
+
+These dimensions appear largely independent from observed academic performance.
+
+Ethical concern shows only a weak association with AI usage frequency and an effect of familiarity: the more you use the AI tools, the less you are concerned with their ethical implications.
+
+**5. Existence of latent performance profiles**
+
+Clustering reveals three distinct profiles primarily structured by:
+
+- baseline academic level
+- GPA evolution
+- Career confidence score
+
+AI usage variables do not strongly differentiate these groups.
+
+When integrated into regression models, clusters remain statistically very significant, indicating the presence of unobserved heterogeneity in academic trajectories.
+
+**6. AI as a capability-dependent amplifier**
+
+The combined evidence suggests that AI does not function as a universal performance enhancer.
+
+*Instead:*
+
+AI appears to act as a **capability-dependent amplifier**, where outcomes depend on baseline skills and the ability to use the tool effectively.
+
+- intermediate students benefit the most;
+- high performers show limited gains (ceiling effect);
+- lower-performing students may not benefit, or may even be negatively affected.
+
+---
+
+## Interpretation {#sec-interpretation}
+
+The dataset does not support a strong relationship between AI usage and academic outcomes. The strongest statistical relationship found here is the continuity between baseline GPA and post-AI GPA.
+
+This suggests that academic performance is highly stable, while AI usage, career confidence, ethical concern, and time saved are weakly connected in this dataset.
+
+In addition to self-reporter measurement biases and a probability of artificial origin of the dataset, this observation makes us believe that the relationship between the AI technologies and GPA scores is probably moderated by other variables not recorded in the collected data.
+
+Cluster analysis yielded the most advanced results and gives us a strong impulse to suggest that AI effectiveness depends on the interaction between baseline capability and tool usage not recorded in the dataset variables.
+
+AI is not a primary driver of performance. AI acts as a capability amplifier or destabilizer, depending on the user profile. The observed clusters are emergent outcomes of this interaction.
+
+The relationship between baseline academic ability and AI gains appears non-monotonic, suggesting an inverted-U type dynamic. 
+
+- For high-performing students, AI operates under a ceiling constraint. Gains are mechanically limited, and usage appears strategic rather than transformative. 
+- Students with intermediate baseline performance exhibit the highest marginal returns. Their skill set appears sufficiently developed to leverage AI outputs critically, while still leaving substantial room for improvement. 
+- For lower-performing students, AI usage may substitute rather than augment learning processes. Limited evaluative capacity can lead to inefficient or counterproductive use, resulting in negligible or even negative outcomes.
+
+The results suggest that the effectiveness of AI is mediated not by usage intensity, but by usage quality — i.e., the ability to critically interpret, adapt, and integrate AI-generated outputs.
+
+Observed variables capture intensity of use, but not cognitive engagement. This likely explains the absence of strong statistical relationships.
+
+Our interpretations remain hypothetical, as the dataset does not include direct measures of cognitive strategies, AI literacy, or study behaviors.
+
+:::{.callout-important title="AI literacy and usage quality"}
+AI does not appear to equalize academic performance. Instead, it reinforces existing trajectories: it marginally benefits high performers, significantly supports intermediate students, and may disadvantage those lacking the skills required to use it effectively.
+
+The observed pattern is consistent with a skill-biased effect of AI usage, where returns depend on the user’s ability to integrate the tool into existing cognitive processes. **Matthew effect: "the rich get richer".**
+:::
+
+---
+
+## Limitations {#sec-limitations}
+
+Several limitations should be considered:
+
+- The dataset is observational and does not include a control group.
+- GPA differences are discretized and affected by rounding.
+- AI usage variables are self-reported rather than directly observed.
+- The dataset includes only limited socio-demographic controls.
+- Some variables appear weakly connected, suggesting limited internal structure.
+- Statistical significance does not necessarily imply practical impact.
+- The dataset may be synthetic or simplified, which limits real-world generalization.
+
+---
+
+# Python data analysis project
+
+Coming soon.
+
+This section will present a Python-based project using pandas, numpy, and visualization libraries to explore, clean, and model a structured dataset.
+
+---
+
+# SQL and database project
+
+Coming soon.
+
+This section will present a database-oriented project focused on data modeling, SQL queries, relational structuring, and possibly graph database logic.
