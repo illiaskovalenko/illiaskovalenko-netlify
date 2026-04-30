@@ -32,6 +32,8 @@ Le projet est exploratoire. Étant donné que le jeu de données ne comprend pas
 
 ---
 
+# Analyse des données
+
 ## Questions analytiques et variables principales {#sec-analytical-questions}
 
 L'analyse se concentre sur cinq questions principales :
@@ -82,7 +84,9 @@ Le jeu de données contient 1 500 observations et aucune valeur manquante. Les v
 
 ---
 
-## Changement de GPA : analyse descriptive {#sec-gpa-descriptive}
+### Changement de GPA
+
+#### Analyse descriptive {#sec-gpa-descriptive}
 
 La première étape est descriptive. Les résumés fournis contiennent toutes les statistiques descriptives de base. Cependant, avant de modéliser toute relation, j'examine si le jeu de données contient une différence de GPA observable après l'utilisation de l'IA.
 
@@ -192,7 +196,7 @@ plot_gpa_scatter
 
 ---
 
-## Distribution de la différence de GPA {#sec-gpa-distribution}
+#### Distribution de la différence de GPA {#sec-gpa-distribution}
 
 Avant d'utiliser des tests statistiques, la distribution des différences appariées doit être inspectée. Pour un test t apparié, l'hypothèse de normalité s'applique à la différence, et non aux deux variables de GPA séparément.
 
@@ -226,30 +230,20 @@ Cela limite la normalité stricte, mais la taille de l'échantillon (=1500) est 
 
 ---
 
-## Tests statistiques de la GPA {#sec-gpa-tests}
+#### Tests statistiques de la GPA {#sec-gpa-tests}
 
 La première question inférentielle est délibérément simple : **les étudiants déclarent-ils une GPA plus élevée après l'utilisation de l'IA qu'avant ?**
 
 ::: {.callout-tip title="Test statistique : test t apparié"}
-**Question de recherche**
+**Question de recherche :** La GPA post-IA est-elle significativement différente de la GPA de base ?
 
-La GPA post-IA est-elle significativement différente de la GPA de base ?
+**Hypothèse nulle (H0) :** Il n'y a pas de différence moyenne entre la GPA de base et la GPA post-IA.
 
-**Hypothèse nulle (H0)**
+**Hypothèse alternative (H1) :** Il existe une différence moyenne entre la GPA de base et la GPA post-IA.
 
-Il n'y a pas de différence moyenne entre la GPA de base et la GPA post-IA.
+**Méthode :** Un test t apparié est utilisé car les deux mesures de GPA sont observées pour les mêmes étudiants.
 
-**Hypothèse alternative (H1)**
-
-Il existe une différence moyenne entre la GPA de base et la GPA post-IA.
-
-**Méthode**
-
-Un test t apparié est utilisé car les deux mesures de GPA sont observées pour les mêmes étudiants.
-
-**Hypothèses**
-
-L'hypothèse clé de normalité s'applique aux différences appariées. Comme le montre la @sec-gpa-distribution, la différence est discrétisée et n'est pas parfaitement normale. Cependant, compte tenu de la grande taille de l'échantillon, le test t apparié devrait rester robuste.
+**Hypothèses :** L'hypothèse clé de normalité s'applique aux différences appariées. Comme le montre la @sec-gpa-distribution, la différence est discrétisée et n'est pas parfaitement normale. Cependant, compte tenu de la grande taille de l'échantillon, le test t apparié devrait rester robuste.
 :::
 
 ```{r}
@@ -264,21 +258,13 @@ tidy(t_test)
 Le test t apparié est complété par un test non paramétrique car la distribution de la différence de GPA est discrétisée.
 
 ::: {.callout-tip title="Contrôle de robustesse : test des rangs signés de Wilcoxon"}
-**Hypothèse nulle (H0)**
+**Hypothèse nulle (H0) :** La différence médiane appariée est égale à zéro.
 
-La différence médiane appariée est égale à zéro.
+**Hypothèse alternative (H1) :** La différence médiane appariée n'est pas égale à zéro.
 
-**Hypothèse alternative (H1)**
+**Méthode :** Le test des rangs signés de Wilcoxon classe les différences appariées absolues et vérifie si les rangs positifs et négatifs sont équilibrés.
 
-La différence médiane appariée n'est pas égale à zéro.
-
-**Méthode**
-
-Le test des rangs signés de Wilcoxon classe les différences appariées absolues et vérifie si les rangs positifs et négatifs sont équilibrés.
-
-**Raison de l'utilisation**
-
-Ce test est moins sensible aux écarts par rapport à la normalité et est approprié comme contrôle de robustesse après les résultats du diagnostic dans la @sec-gpa-distribution.
+**Raison de l'utilisation :** Ce test est moins sensible aux écarts par rapport à la normalité et est approprié comme contrôle de robustesse après les résultats du diagnostic dans la @sec-gpa-distribution.
 :::
 
 ```{r}
@@ -297,38 +283,26 @@ Notre prochaine étape consiste à tester si les variables d'utilisation de l'IA
 
 ---
 
-## Modélisation des résultats de la GPA {#sec-gpa-models}
+#### Modélisation des résultats de la GPA {#sec-gpa-models}
 
 Les tests statistiques montrent que la GPA augmente en moyenne. L'étape de modélisation pose une question différente : **les variables d'utilisation de l'IA peuvent-elles expliquer la variation des résultats de la GPA ?**
 
 ---
 
-### Modèle naïf : différence de GPA expliquée par l'utilisation de l'IA
+##### Modèle naïf : différence de GPA expliquée par l'utilisation de l'IA
 
 ::: {.callout-tip title="Modèle 1 : modèle MCO sur la différence de GPA"}
-**Question de recherche**
+**Question de recherche :** Les variables d'utilisation de l'IA expliquent-elles le changement de GPA ?
 
-Les variables d'utilisation de l'IA expliquent-elles le changement de GPA ?
+**Variable dépendante :** `gpa_diff = GPA_Post_AI - GPA_Baseline`
 
-**Variable dépendante**
+**Hypothèse nulle (H0) :** Les variables d'utilisation de l'IA n'ont aucune association avec le changement de GPA.
 
-`gpa_diff = GPA_Post_AI - GPA_Baseline`
+**Hypothèse alternative (H1) :** Au moins une variable d'utilisation de l'IA est associée au changement de GPA.
 
-**Hypothèse nulle (H0)**
+**Méthode :** La régression MCO est utilisée comme premier modèle explicatif.
 
-Les variables d'utilisation de l'IA n'ont aucune association avec le changement de GPA.
-
-**Hypothèse alternative (H1)**
-
-Au moins une variable d'utilisation de l'IA est associée au changement de GPA.
-
-**Méthode**
-
-La régression MCO est utilisée comme premier modèle explicatif.
-
-**Hypothèses et diagnostics**
-
-Les diagnostics des résidus sont inspectés après l'estimation du modèle. Comme discuté dans la @sec-gpa-distribution, la variable dépendante est discrétisée, le modèle est donc traité comme exploratoire plutôt que définitif en termes d'analyse d'impact.
+**Hypothèses et diagnostics :** Les diagnostics des résidus sont inspectés après l'estimation du modèle. Comme discuté dans la @sec-gpa-distribution, la variable dépendante est discrétisée, le modèle est donc traité comme exploratoire plutôt que définitif en termes d'analyse d'impact.
 :::
 
 ```{r}
@@ -356,7 +330,7 @@ Afin de résoudre tout problème lié à la forme de la variable dépendante (`G
 
 ---
 
-### Modèle ajusté : GPA post-IA contrôlée par la GPA de base
+##### Modèle ajusté : GPA post-IA contrôlée par la GPA de base
 
 ::: {.callout-important title="Pourquoi la GPA de base doit être contrôlée"}
 Le modèle précédent ignore le niveau académique de départ de chaque étudiant. C'est problématique car la GPA est bornée : les étudiants ayant une GPA de base élevée ont moins de marge de progression.
@@ -386,20 +360,14 @@ La structure des résidus montre une discrétisation et un effet de plafond prè
 
 ---
 
-### Modèle étendu : ajout de l'Age et de la Major
+##### Modèle étendu : ajout de l'Age et de la Major
 
 ::: {.callout-tip title="Contrôles socio-démographiques"}
-**Question de recherche**
+**Question de recherche :** L'âge et la spécialité améliorent-ils le modèle explicatif ?
 
-L'âge et la spécialité améliorent-ils le modèle explicatif ?
+**Méthode :** Le modèle de GPA ajusté est étendu avec `Age` et `Major`.
 
-**Méthode**
-
-Le modèle de GPA ajusté est étendu avec `Age` et `Major`.
-
-**Stratégie d'interprétation**
-
-Ce modèle teste si les variables socio-démographiques ajoutent un pouvoir explicatif significatif au-delà de la GPA de base et des variables d'utilisation de l'IA.
+**Stratégie d'interprétation :** Ce modèle teste si les variables socio-démographiques ajoutent un pouvoir explicatif significatif au-delà de la GPA de base et des variables d'utilisation de l'IA.
 :::
 
 ```{r}
@@ -422,23 +390,19 @@ L'ajout de l'âge et de la spécialité n'améliore pas substantiellement le mod
 
 ---
 
-### Modèle logistique : probabilité d'amélioration de la GPA
+##### Modèle logistique : probabilité d'amélioration de la GPA
 
 ::: {.callout-tip title="Spécification alternative : modèle d'amélioration binaire"}
 
 Puisque `gpa_diff` est une variable discrète, un modèle binaire peut être utilisé comme spécification complémentaire.
 
-**Nouvelle variable dépendante**
-`gpa_improved` = 1 si `gpa_diff` > 0, sinon 0.
+**Nouvelle variable dépendante :** `gpa_improved` = 1 si `gpa_diff` > 0, sinon 0.
 
-**Question de recherche**
-Quelles variables prédisent si un étudiant améliore sa GPA ?
+**Question de recherche :** Quelles variables prédisent si un étudiant améliore sa GPA ?
 
-**Méthode**
-La régression logistique est utilisée pour modéliser la probabilité d'amélioration.
+**Méthode :** La régression logistique est utilisée pour modéliser la probabilité d'amélioration.
 
-**Interprétation**
-Les coefficients sont transformés en rapports de cotes (odds ratios) pour plus de lisibilité.
+**Interprétation :** Les coefficients sont transformés en rapports de cotes (odds ratios) pour plus de lisibilité.
 :::
 
 ```{r}
@@ -471,24 +435,18 @@ Le modèle logistique ne révèle pas de prédicteurs robustes de l'amélioratio
 
 ---
 
-## Confiance dans la carrière {#sec-career-confidence}
+### Confiance dans la carrière {#sec-career-confidence}
 
 Tournons-nous vers un autre type de résultat : la confiance dans la carrière. Cette variable ne mesure pas directement la performance académique. Elle capture plutôt une perception subjective de la préparation future à la vie professionnelle.
 
-## Corrélations avec les métriques de GPA
+#### Corrélations avec les métriques de GPA
 
 ::: {.callout-tip title="Analyse de corrélation"}
-**Question de recherche**
+**Question de recherche :** La confiance dans la carrière est-elle associée à la GPA de base, à la GPA post-IA ou au changement de GPA ?
 
-La confiance dans la carrière est-elle associée à la GPA de base, à la GPA post-IA ou au changement de GPA ?
+**Méthodes :** Les corrélations de *Pearson* sont utilisées pour les relations linéaires. Les corrélations de *Spearman* et *Kendall* sont ajoutées comme contrôles de robustesse car la GPA et les scores de confiance sont des variables discrètes.
 
-**Méthodes**
-
-Les corrélations de *Pearson* sont utilisées pour les relations linéaires. Les corrélations de *Spearman* et *Kendall* sont ajoutées comme contrôles de robustesse car la GPA et les scores de confiance sont des variables discrètes.
-
-**Interprétation**
-
-Si toutes les corrélations restent proches de zéro, il n'y a pas de relation continue ou monotone significative à signaler.
+**Interprétation :** Si toutes les corrélations restent proches de zéro, il n'y a pas de relation continue ou monotone significative à signaler.
 :::
 
 ```{r}
@@ -528,7 +486,7 @@ Les corrélations de Pearson, Spearman et Kendall sont toutes proches de zéro (
 
 Les étudiants ayant amélioré leur GPA ont une confiance moyenne légèrement plus élevée (`5,53` contre `5,25`, soit une différence de 0,28 point), mais l'impact est très modeste.
 
-### Distribution de la confiance dans la carrière
+#### Distribution de la confiance dans la carrière
 
 ```{r}
 qqnorm(tbl_database$Career_Confidence_Score)
@@ -552,25 +510,17 @@ plot_career_confidence_hist
 
 La confiance dans la carrière est manifestement une variable discrète uniformément distribuée, suggérant une structure interne limitée à exploiter à des fins d'analyse.
 
-### Modèle de confiance dans la carrière
+#### Modèle de confiance dans la carrière
 
 ::: {.callout-tip title="Modèle MCO sur la confiance dans la carrière"}
 
-**Question de recherche**
+**Question de recherche :** La GPA, les variables d'utilisation de l'IA, l'âge et la spécialité peuvent-ils expliquer la confiance dans la carrière ?
 
-La GPA, les variables d'utilisation de l'IA, l'âge et la spécialité peuvent-ils expliquer la confiance dans la carrière ?
+**Variable dépendante :** `Career_Confidence_Score`
 
-**Variable dépendante**
+**Méthode :** La régression MCO est utilisée comme approximation. Bien que la variable soit discrète, elle possède dix niveaux, ce qui permet un modèle linéaire exploratoire simple.
 
-`Career_Confidence_Score`
-
-**Méthode**
-
-La régression MCO est utilisée comme approximation. Bien que la variable soit discrète, elle possède dix niveaux, ce qui permet un modèle linéaire exploratoire simple.
-
-**Interprétation**
-
-Le modèle est évalué globalement à l'aide du test F et du R², et pas seulement par les p-values individuelles.
+**Interprétation :** Le modèle est évalué globalement à l'aide du test F et du R², et pas seulement par les p-values individuelles.
 :::
 
 ```{r}
@@ -593,26 +543,18 @@ Le modèle n'est pas globalement significatif et n'explique qu'une très faible 
 
 ---
 
-## Utilisation et adoption de l'IA {#sec-ai-usage}
+### Utilisation et adoption de l'IA {#sec-ai-usage}
 
 À ce stade, notre analyse change de direction. Au lieu de demander si l'utilisation de l'IA affecte les résultats, je teste si la performance académique de base prédit l'utilisation de l'IA.
 
 ::: {.callout-tip title="Modèle inversé : qui utilise l'IA plus fréquemment ?"}
-**Question de recherche**
+**Question de recherche :** Les étudiants ayant une GPA de base plus faible utilisent-ils l'IA plus fréquemment ?
 
-Les étudiants ayant une GPA de base plus faible utilisent-ils l'IA plus fréquemment ?
+**Hypothèse nulle (H0) :** La GPA de base, l'âge et la spécialité ne prédisent pas la fréquence d'utilisation de l'IA.
 
-**Hypothèse nulle (H0)**
+**Hypothèse alternative (H1) :** Au moins une de ces variables prédit la fréquence d'utilisation de l'IA.
 
-La GPA de base, l'âge et la spécialité ne prédisent pas la fréquence d'utilisation de l'IA.
-
-**Hypothèse alternative (H1)**
-
-Au moins une de ces variables prédit la fréquence d'utilisation de l'IA.
-
-**Méthode**
-
-La régression MCO est utilisée avec `Task_Frequency_Daily` comme variable dépendante.
+**Méthode :** La régression MCO est utilisée avec `Task_Frequency_Daily` comme variable dépendante.
 :::
 
 ```{r}
@@ -652,26 +594,18 @@ Le modèle binaire confirme le même résultat : l'utilisation intensive de l'IA
 
 ---
 
-## Préoccupations éthiques {#sec-ethics}
+### Préoccupations éthiques {#sec-ethics}
 
 La préoccupation éthique est une variable ordinale. Par conséquent, une régression logistique ordonnée est plus appropriée qu'un modèle linéaire standard.
 
 ::: {.callout-tip title="Régression logistique ordonnée"}
-**Question de recherche**
+**Question de recherche :** Les préoccupations éthiques sont-elles structurées par le comportement d'utilisation de l'IA ?
 
-Les préoccupations éthiques sont-elles structurées par le comportement d'utilisation de l'IA ?
+**Variable dépendante :** `AI_Ethics_Concern`
 
-**Variable dépendante**
+**Méthode :** Une régression logistique ordonnée est utilisée car la préoccupation éthique comporte des catégories ordonnées.
 
-`AI_Ethics_Concern`
-
-**Méthode**
-
-Une régression logistique ordonnée est utilisée car la préoccupation éthique comporte des catégories ordonnées.
-
-**Interprétation**
-
-Les rapports de cotes supérieurs à 1 indiquent des chances plus élevées de se trouver dans une catégorie de préoccupation plus importante. Les rapports de cotes inférieurs à 1 indiquent des chances plus faibles.
+**Interprétation :** Les rapports de cotes supérieurs à 1 indiquent des chances plus élevées de se trouver dans une catégorie de préoccupation plus importante. Les rapports de cotes inférieurs à 1 indiquent des chances plus faibles.
 :::
 
 ```{r}
@@ -702,7 +636,7 @@ Cet **effet de familiarité** est statistiquement détectable mais faible. Globa
 
 ---
 
-## Temps gagné {#sec-time-saved}
+### Temps gagné {#sec-time-saved}
 
 Le temps gagné est intuitivement attendu comme la variable la plus directement liée à l'utilisation de l'IA. Cela en fait un cas test important.
 
@@ -727,17 +661,11 @@ plot_time_saved_hist
 ```
 
 ::: {.callout-tip title="Modèle MCO sur le temps gagné"}
-**Question de recherche**
+**Question de recherche :** Quelles variables expliquent le temps hebdomadaire perçu comme gagné ?
 
-Quelles variables expliquent le temps hebdomadaire perçu comme gagné ?
+**Variable dépendante :** `Time_Saved_Hours_Weekly`
 
-**Variable dépendante**
-
-`Time_Saved_Hours_Weekly`
-
-**Méthode**
-
-La régression MCO est utilisée pour tester si la fréquence d'utilisation, le cas d'utilisation, l'outil d'IA, la GPA, l'âge ou la spécialité expliquent le temps gagné.
+**Méthode :** La régression MCO est utilisée pour tester si la fréquence d'utilisation, le cas d'utilisation, l'outil d'IA, la GPA, l'âge ou la spécialité expliquent le temps gagné.
 :::
 
 ```{r}
@@ -761,20 +689,18 @@ Il y a deux explications possibles à ces résultats : soit les mesures autodéc
 
 ---
 
-## Clustering et segmentation {#sec-clustering}
+### Clustering et segmentation {#sec-clustering}
+
+#### Trouver les clusters dans les données
 
 Plutôt que de tester uniquement des relations linéaires, la dernière étape de l'analyse explore si des profils latents d'étudiants émergent de la distribution conjointe de la performance académique, de l'utilisation de l'IA et des résultats perçus.
 
 ::: {.callout-tip title="Clustering K-means"}
-**Question de recherche**
+**Question de recherche :** Les étudiants peuvent-ils être regroupés en profils distincts combinant performance académique, utilisation de l'IA et résultats perçus ?
 
-Les étudiants peuvent-ils être regroupés en profils distincts combinant performance académique, utilisation de l'IA et résultats perçus ?
+**Méthode :** Le clustering K-means est appliqué aux variables numériques standardisées.
 
-**Méthode**
-
-Le clustering K-means est appliqué aux variables numériques standardisées.
-
-**Variables utilisées**
+**Variables utilisées :**
 
 - `Task_Frequency_Daily`
 - `Time_Saved_Hours_Weekly`
@@ -782,13 +708,9 @@ Le clustering K-means est appliqué aux variables numériques standardisées.
 - `GPA_Baseline`
 - `gpa_diff`.
 
-**Raison de la mise à l'échelle (scaling)**
+**Raison de la mise à l'échelle (scaling) :** Les variables sont mesurées sur des échelles différentes. La standardisation garantit que chaque variable contribue de manière égale à l'algorithme de clustering.
 
-Les variables sont mesurées sur des échelles différentes. La standardisation garantit que chaque variable contribue de manière égale à l'algorithme de clustering.
-
-**Limitation importante**
-
-Puisque les variables de GPA sont incluses dans le processus de clustering, les clusters résultants reflètent partiellement la structure des résultats. Ils doivent donc être interprétés comme des profils descriptifs et non comme des groupes causaux.
+**Limitation importante :** Puisque les variables de GPA sont incluses dans le processus de clustering, les clusters résultants reflètent partiellement la structure des résultats. Ils doivent donc être interprétés comme des profils descriptifs et non comme des groupes causaux.
 :::
 
 ```{r}
@@ -885,19 +807,15 @@ Les étudiants ayant une GPA de base plus élevée ont très peu gagné de l'uti
 
 Cependant, les étudiants ayant un score de GPA de base plus faible n'ont rien gagné des outils d'IA, si ce n'est le score de confiance dans la carrière le plus bas et de pires résultats de GPA. Ils utilisent les outils d'IA presque aussi fréquemment que les "improvers", mais ils en tirent moins de bénéfices que n'importe quel autre groupe.
 
-## Intégration des clusters dans le modèle de GPA {#sec-clustering-ols}
+#### Intégration des clusters dans le modèle de GPA {#sec-clustering-ols}
 
 Pour tester si ces profils latents capturent une variation supplémentaire des résultats académiques, l'appartenance au cluster est introduite dans le modèle de GPA.
 
 ::: {.callout-tip title="Régression basée sur les clusters : mise en garde sur l'interprétation"}
 
-**Objectif**
+**Objectif :** Évaluer si l'appartenance au cluster explique la variation de la GPA post-IA au-delà de la GPA de base et des variables observées.
 
-Évaluer si l'appartenance au cluster explique la variation de la GPA post-IA au-delà de la GPA de base et des variables observées.
-
-**Limitation importante**
-
-Les clusters sont construits à l'aide de variables directement liées aux résultats de la GPA. Par conséquent, leur effet dans les modèles de régression reflète une structure latente déjà présente dans les données, et non un mécanisme causal indépendant.
+**Limitation importante :** Les clusters sont construits à l'aide de variables directement liées aux résultats de la GPA. Par conséquent, leur effet dans les modèles de régression reflète une structure latente déjà présente dans les données, et non un mécanisme causal indépendant.
 :::
 
 ```{r}
@@ -1024,7 +942,7 @@ Plusieurs limites doivent être prises en compte :
 
 ---
 
-# Projet d'analyse de données Python
+# 2. Projet d'analyse de données Python
 
 *À venir.*
 
@@ -1032,7 +950,7 @@ Cette section présentera un projet basé sur Python utilisant `pandas`, `numpy`
 
 ---
 
-# Projet SQL et bases de données
+# 3. Projet SQL et bases de données
 
 *À venir.*
 

@@ -32,7 +32,9 @@ The project is exploratory. Since the dataset does not include a control group -
 
 ---
 
-## Analytical questions and main variables {#sec-analytical-questions}
+## Analysis
+
+### Analytical questions and main variables {#sec-analytical-questions}
 
 The analysis focuses on five main questions:
 
@@ -56,7 +58,7 @@ As a result, the analysis should be interpreted as an exploratory exercise focus
 
 ---
 
-## Data loading and preparation (character variables -> factors) {#sec-data-preparation}
+### Data loading and preparation (character variables -> factors) {#sec-data-preparation}
 
 ```{r}
 library(tidyverse)
@@ -82,7 +84,9 @@ The dataset contains 1,500 observations and no missing values. Character variabl
 
 ---
 
-## GPA change: descriptive analysis {#sec-gpa-descriptive}
+### GPA change
+
+#### Descriptive analysis {#sec-gpa-descriptive}
 
 The first step is descriptive. The summaries provided contain all the basic descriptive statistics. However, before modeling any relationship, I examine whether the dataset contains an observable GPA difference after AI usage.
 
@@ -192,7 +196,7 @@ plot_gpa_scatter
 
 ---
 
-## GPA difference distribution {#sec-gpa-distribution}
+#### GPA difference distribution {#sec-gpa-distribution}
 
 Before using statistical tests, the distribution of the paired differences must be inspected. For a paired t-test, the normality assumption applies to the difference, not to the two GPA variables separately.
 
@@ -226,30 +230,20 @@ This limits strict normality, but the sample size (=1500) is large enough for th
 
 ---
 
-## GPA statistical testing {#sec-gpa-tests}
+#### GPA statistical testing {#sec-gpa-tests}
 
 The first inferential question is deliberately simple: **do students report a higher GPA after AI usage than before?**
 
 ::: {.callout-tip title="Statistical test: paired t-test"}
-**Research question**
+**Research question: ** Is post-AI GPA significantly different from baseline GPA?
 
-Is post-AI GPA significantly different from baseline GPA?
+**Null hypothesis (H0):** There is no mean difference between baseline GPA and post-AI GPA.
 
-**Null hypothesis (H0)**
+**Alternative hypothesis (H1):** There is a mean difference between baseline GPA and post-AI GPA.
 
-There is no mean difference between baseline GPA and post-AI GPA.
+**Method:** A paired t-test is used because both GPA measures are observed for the same students.
 
-**Alternative hypothesis (H1)**
-
-There is a mean difference between baseline GPA and post-AI GPA.
-
-**Method**
-
-A paired t-test is used because both GPA measures are observed for the same students.
-
-**Assumptions**
-
-The key normality assumption applies to the paired differences. As shown in @sec-gpa-distribution, the difference is discretized and not perfectly normal. However, given the large sample size, the paired t-test should remain robust.
+**Assumptions:** The key normality assumption applies to the paired differences. As shown in @sec-gpa-distribution, the difference is discretized and not perfectly normal. However, given the large sample size, the paired t-test should remain robust.
 :::
 
 ```{r}
@@ -264,21 +258,13 @@ tidy(t_test)
 The paired t-test is complemented with a non-parametric test because the GPA difference distribution is discretized.
 
 ::: {.callout-tip title="Robustness check: Wilcoxon signed-rank test"}
-**Null hypothesis (H0)**
+**Null hypothesis (H0):** The median paired difference is equal to zero.
 
-The median paired difference is equal to zero.
+**Alternative hypothesis (H1):** The median paired difference is not equal to zero.
 
-**Alternative hypothesis (H1)**
+**Method:** The Wilcoxon signed-rank test ranks the absolute paired differences and checks whether positive and negative ranks are balanced.
 
-The median paired difference is not equal to zero.
-
-**Method**
-
-The Wilcoxon signed-rank test ranks the absolute paired differences and checks whether positive and negative ranks are balanced.
-
-**Reason for use**
-
-This test is less sensitive to deviations from normality and is appropriate as a robustness check after the diagnostic findings in @sec-gpa-distribution.
+**Reason for use:** This test is less sensitive to deviations from normality and is appropriate as a robustness check after the diagnostic findings in @sec-gpa-distribution.
 :::
 
 ```{r}
@@ -297,38 +283,26 @@ Our next step is to test whether AI usage variables actually explain this change
 
 ---
 
-## Modeling GPA outcomes {#sec-gpa-models}
+#### Modeling GPA outcomes {#sec-gpa-models}
 
 The statistical tests show that GPA increases on average. The modeling stage asks a different question: **can AI usage variables explain variation in GPA outcomes?**
 
 ---
 
-### Naive model: GPA difference explained by AI usage
+##### Naive model: GPA difference explained by AI usage
 
 ::: {.callout-tip title="Model 1: OLS model on GPA difference"}
-**Research question**
+**Research question:** Do AI usage variables explain GPA change?
 
-Do AI usage variables explain GPA change?
+**Dependent variable:** `gpa_diff = GPA_Post_AI - GPA_Baseline`
 
-**Dependent variable**
+**Null hypothesis (H0):** AI usage variables have no association with GPA change.
 
-`gpa_diff = GPA_Post_AI - GPA_Baseline`
+**Alternative hypothesis (H1):** At least one AI usage variable is associated with GPA change.
 
-**Null hypothesis (H0)**
+**Method:** OLS regression is used as a first explanatory model.
 
-AI usage variables have no association with GPA change.
-
-**Alternative hypothesis (H1)**
-
-At least one AI usage variable is associated with GPA change.
-
-**Method**
-
-OLS regression is used as a first explanatory model.
-
-**Assumptions and diagnostics**
-
-Residual diagnostics are inspected after model estimation. As discussed in @sec-gpa-distribution, the dependent variable is discretized, so the model is treated as exploratory rather than definitive in terms of impact analysis.
+**Assumptions and diagnostics:** Residual diagnostics are inspected after model estimation. As discussed in @sec-gpa-distribution, the dependent variable is discretized, so the model is treated as exploratory rather than definitive in terms of impact analysis.
 :::
 
 ```{r}
@@ -356,7 +330,7 @@ In order to solve any issues related to the form of the dependent variable (`GPA
 
 ---
 
-### Adjusted model: post-AI GPA controlled by baseline GPA
+##### Adjusted model: post-AI GPA controlled by baseline GPA
 
 ::: {.callout-important title="Why baseline GPA must be controlled"}
 The previous model ignores the starting academic level of each student. This is problematic because GPA is bounded: students with a high baseline GPA have less room to improve.
@@ -386,20 +360,14 @@ The residual structure shows discretization and a ceiling effect near the maximu
 
 ---
 
-### Extended model: adding `Age` and `Major`
+##### Extended model: adding `Age` and `Major`
 
 ::: {.callout-tip title="Socio-demographic controls"}
-**Research question**
+**Research question:** Do age and major improve the explanatory model?
 
-Do age and major improve the explanatory model?
+**Method:** The adjusted GPA model is extended with `Age` and `Major`.
 
-**Method**
-
-The adjusted GPA model is extended with `Age` and `Major`.
-
-**Interpretation strategy**
-
-This model tests whether socio-demographic variables add meaningful explanatory power beyond baseline GPA and AI usage variables.
+**Interpretation strategy:** This model tests whether socio-demographic variables add meaningful explanatory power beyond baseline GPA and AI usage variables.
 :::
 
 ```{r}
@@ -422,23 +390,19 @@ Adding age and major does not substantially improve the model. Baseline GPA rema
 
 ---
 
-### Logistic model: probability of GPA improvement
+##### Logistic model: probability of GPA improvement
 
 ::: {.callout-tip title="Alternative specification: binary improvement model"}
 
 Because `gpa_diff` is a discrete variable, a binary model can be used as a complementary specification.
 
-**New dependent variable**
-`gpa_improved`= 1 if `gpa_diff` > 0, otherwise 0.
+**New dependent variable:** `gpa_improved`= 1 if `gpa_diff` > 0, otherwise 0.
 
-**Research question**
-Which variables predict whether a student improves their GPA?
+**Research question:** Which variables predict whether a student improves their GPA?
 
-**Method**
-Logistic regression is used to model the probability of improvement.
+**Method:** Logistic regression is used to model the probability of improvement.
 
-**Interpretation**
-Coefficients are transformed into odds ratios for readability.
+**Interpretation:** Coefficients are transformed into odds ratios for readability.
 :::
 
 ```{r}
@@ -471,24 +435,18 @@ The logistic model does not reveal robust predictors of GPA improvement. Fine Ar
 
 ---
 
-## Career confidence {#sec-career-confidence}
+### Career confidence {#sec-career-confidence}
 
 Let's turn to a different kind of outcome: career confidence. This variable does not measure academic performance directly. Instead, it captures a subjective perception of future readiness for career.
 
-## Correlations with GPA metrics
+#### Correlations with GPA metrics
 
 ::: {.callout-tip title="Correlation analysis"}
-**Research question**
+**Research question:** Is career confidence associated with GPA baseline, post-AI GPA, or GPA change?
 
-Is career confidence associated with GPA baseline, post-AI GPA, or GPA change?
+**Methods:** *Pearson* correlations are used for linear relationships. *Spearman* and *Kendall* correlations are added as robustness checks because both GPA and confidence scores are discrete variables.
 
-**Methods**
-
-*Pearson* correlations are used for linear relationships. *Spearman* and *Kendall* correlations are added as robustness checks because both GPA and confidence scores are discrete variables.
-
-**Interpretation**
-
-If all correlations remain close to zero, there is no meaningful continuous or monotonic relationship to report.
+**Interpretation:** If all correlations remain close to zero, there is no meaningful continuous or monotonic relationship to report.
 :::
 
 ```{r}
@@ -528,7 +486,7 @@ Pearson, Spearman, and Kendall correlations are all close to zero (<0.03). Caree
 
 Students who improved their GPA have slightly higher average confidence (`5.53` vs. `5.25`, a difference of 0.28 points), but the impact is very modest.
 
-### Distribution of career confidence
+#### Distribution of career confidence
 
 ```{r}
 qqnorm(tbl_database$Career_Confidence_Score)
@@ -552,25 +510,17 @@ plot_career_confidence_hist
 
 Career confidence is evidently a discrete variable evenly distributed, suggesting limited internal structure to exploit for analysis purposes.
 
-### Career confidence model
+#### Career confidence model
 
 ::: {.callout-tip title="OLS model on career confidence"}
 
-**Research question**
+**Research question:** Can GPA, AI usage variables, age, and major explain career confidence?
 
-Can GPA, AI usage variables, age, and major explain career confidence?
+**Dependent variable:** `Career_Confidence_Score`
 
-**Dependent variable**
+**Method:** OLS regression is used as an approximation. Although the variable is discrete, it has ten levels, which allows a simple exploratory linear model.
 
-`Career_Confidence_Score`
-
-**Method**
-
-OLS regression is used as an approximation. Although the variable is discrete, it has ten levels, which allows a simple exploratory linear model.
-
-**Interpretation**
-
-The model is evaluated globally using the F-test and R², not only individual p-values.
+**Interpretation:** The model is evaluated globally using the F-test and R², not only individual p-values.
 :::
 
 ```{r}
@@ -593,26 +543,18 @@ The model is not globally significant and explains only a very small share of va
 
 ---
 
-## AI usage and adoption {#sec-ai-usage}
+### AI usage and adoption {#sec-ai-usage}
 
 At this point, our analysis changes direction. Instead of asking whether AI usage affects outcomes, I test whether baseline academic performance predicts AI usage.
 
 ::: {.callout-tip title="Inverted model: who uses AI more frequently?"}
-**Research question**
+**Research question:** Do students with lower baseline GPA use AI more frequently?
 
-Do students with lower baseline GPA use AI more frequently?
+**Null hypothesis (H0):** Baseline GPA, age, and major do not predict AI usage frequency.
 
-**Null hypothesis (H0)**
+**Alternative hypothesis (H1):** At least one of these variables predicts AI usage frequency.
 
-Baseline GPA, age, and major do not predict AI usage frequency.
-
-**Alternative hypothesis (H1)**
-
-At least one of these variables predicts AI usage frequency.
-
-**Method**
-
-OLS regression is used with `Task_Frequency_Daily` as the dependent variable.
+**Method:** OLS regression is used with `Task_Frequency_Daily` as the dependent variable.
 :::
 
 ```{r}
@@ -652,26 +594,18 @@ The binary model confirms the same result: high AI usage is not meaningfully pre
 
 ---
 
-## Ethical concerns {#sec-ethics}
+### Ethical concerns {#sec-ethics}
 
 Ethical concern is an ordinal variable. Therefore, an ordered logistic regression is more appropriate than a standard linear model.
 
 ::: {.callout-tip title="Ordered logistic regression"}
-**Research question**
+**Research question:** Are ethical concerns structured by AI usage behavior?
 
-Are ethical concerns structured by AI usage behavior?
+**Dependent variable:** `AI_Ethics_Concern`
 
-**Dependent variable**
+**Method:** An ordered logistic regression is used because ethical concern has ordered categories.
 
-`AI_Ethics_Concern`
-
-**Method**
-
-An ordered logistic regression is used because ethical concern has ordered categories.
-
-**Interpretation**
-
-Odds ratios greater than 1 indicate higher odds of being in a higher concern category. Odds ratios below 1 indicate lower odds.
+**Interpretation:** Odds ratios greater than 1 indicate higher odds of being in a higher concern category. Odds ratios below 1 indicate lower odds.
 :::
 
 ```{r}
@@ -702,7 +636,7 @@ This **effect of familiarity** is statistically detectable but small. Overall, e
 
 ---
 
-## Time saved {#sec-time-saved}
+### Time saved {#sec-time-saved}
 
 Time saved is intuitively expected to be the variable most directly connected to AI usage. This makes it an important test case.
 
@@ -727,17 +661,11 @@ plot_time_saved_hist
 ```
 
 ::: {.callout-tip title="OLS model on time saved"}
-**Research question**
+**Research question:** Which variables explain perceived weekly time saved?
 
-Which variables explain perceived weekly time saved?
+**Dependent variable:** `Time_Saved_Hours_Weekly`
 
-**Dependent variable**
-
-`Time_Saved_Hours_Weekly`
-
-**Method**
-
-OLS regression is used to test whether usage frequency, usage case, AI tool, GPA, age, or major explain time saved.
+**Method:** OLS regression is used to test whether usage frequency, usage case, AI tool, GPA, age, or major explain time saved.
 :::
 
 ```{r}
@@ -761,20 +689,18 @@ There are two possible explanations for these results: either the self-reported 
 
 ---
 
-## Clustering and segmentation {#sec-clustering}
+### Clustering {#sec-clustering}
+
+#### Finding clusters in the data
 
 Rather than testing linear relationships only, the final step of the analysis explores whether latent profiles of students emerge from the joint distribution of academic performance, AI usage, and perceived outcomes.
 
 ::: {.callout-tip title="K-means clustering"}
-**Research question**
+**Research question:** Can students be grouped into distinct profiles combining academic performance, AI usage, and perceived outcomes?
 
-Can students be grouped into distinct profiles combining academic performance, AI usage, and perceived outcomes?
+**Method:** K-means clustering is applied to standardized numerical variables.
 
-**Method**
-
-K-means clustering is applied to standardized numerical variables.
-
-**Variables used**
+**Variables used:**
 
 - `Task_Frequency_Daily`
 - `Time_Saved_Hours_Weekly`
@@ -782,13 +708,9 @@ K-means clustering is applied to standardized numerical variables.
 - `GPA_Baseline`
 - `gpa_diff`.
 
-**Reason for scaling**
+**Reason for scaling:** Variables are measured on different scales. Standardization ensures that each variable contributes equally to the clustering algorithm.
 
-Variables are measured on different scales. Standardization ensures that each variable contributes equally to the clustering algorithm.
-
-**Important limitation**
-
-Because GPA variables are included in the clustering process, the resulting clusters partially reflect outcome structure. They must therefore be interpreted as descriptive profiles, not causal groups.
+**Important limitation:** Because GPA variables are included in the clustering process, the resulting clusters partially reflect outcome structure. They must therefore be interpreted as descriptive profiles, not causal groups.
 :::
 
 ```{r}
@@ -885,19 +807,15 @@ The students with higher baseline GPA gained very little from AI usage, their en
 
 However, students with lower GPA baseline score did not gain anything from AI tools if not the lowest career confidence score and worse GPA results. They use AI tools almost as frequently as "improvers", but they gain less from the tools than any other group.
 
-## Cluster integration into GPA model {#sec-clustering-ols}
+#### Cluster integration into GPA model {#sec-clustering-ols}
 
 To test whether these latent profiles capture additional variation in academic outcomes, cluster membership is introduced into the GPA model.
 
 ::: {.callout-tip title="Cluster-based regression: interpretation caution"}
 
-**Objective**
+**Objective:** Assess whether cluster membership explains variation in post-AI GPA beyond baseline GPA and observed variables.
 
-Assess whether cluster membership explains variation in post-AI GPA beyond baseline GPA and observed variables.
-
-**Important limitation**
-
-Clusters are constructed using variables directly related to GPA outcomes. Therefore, their effect in regression models reflects latent structure already present in the data, not an independent causal mechanism.
+**Important limitation:** Clusters are constructed using variables directly related to GPA outcomes. Therefore, their effect in regression models reflects latent structure already present in the data, not an independent causal mechanism.
 :::
 
 ```{r}
@@ -1040,7 +958,7 @@ Several limitations should be considered:
 
 ---
 
-# Python data analysis project
+# 2. Python data analysis project
 
 Coming soon.
 
@@ -1048,7 +966,7 @@ This section will present a Python-based project using pandas, numpy, and visual
 
 ---
 
-# SQL and database project
+# 3. SQL and database project
 
 Coming soon.
 

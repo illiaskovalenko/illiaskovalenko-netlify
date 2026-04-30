@@ -181,35 +181,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul class="collapse">
   <li><a href="#project-resources" id="toc-project-resources" class="nav-link" data-scroll-target="#project-resources">Project resources</a></li>
   <li><a href="#sec-project-overview" id="toc-sec-project-overview" class="nav-link" data-scroll-target="#sec-project-overview">Project overview</a></li>
+  <li><a href="#analysis" id="toc-analysis" class="nav-link" data-scroll-target="#analysis">Analysis</a>
+  <ul class="collapse">
   <li><a href="#sec-analytical-questions" id="toc-sec-analytical-questions" class="nav-link" data-scroll-target="#sec-analytical-questions">Analytical questions and main variables</a></li>
   <li><a href="#sec-data-preparation" id="toc-sec-data-preparation" class="nav-link" data-scroll-target="#sec-data-preparation">Data loading and preparation (character variables -&gt; factors)</a></li>
-  <li><a href="#sec-gpa-descriptive" id="toc-sec-gpa-descriptive" class="nav-link" data-scroll-target="#sec-gpa-descriptive">GPA change: descriptive analysis</a></li>
-  <li><a href="#sec-gpa-distribution" id="toc-sec-gpa-distribution" class="nav-link" data-scroll-target="#sec-gpa-distribution">GPA difference distribution</a></li>
-  <li><a href="#sec-gpa-tests" id="toc-sec-gpa-tests" class="nav-link" data-scroll-target="#sec-gpa-tests">GPA statistical testing</a></li>
-  <li><a href="#sec-gpa-models" id="toc-sec-gpa-models" class="nav-link" data-scroll-target="#sec-gpa-models">Modeling GPA outcomes</a>
-  <ul class="collapse">
-  <li><a href="#naive-model-gpa-difference-explained-by-ai-usage" id="toc-naive-model-gpa-difference-explained-by-ai-usage" class="nav-link" data-scroll-target="#naive-model-gpa-difference-explained-by-ai-usage">Naive model: GPA difference explained by AI usage</a></li>
-  <li><a href="#adjusted-model-post-ai-gpa-controlled-by-baseline-gpa" id="toc-adjusted-model-post-ai-gpa-controlled-by-baseline-gpa" class="nav-link" data-scroll-target="#adjusted-model-post-ai-gpa-controlled-by-baseline-gpa">Adjusted model: post-AI GPA controlled by baseline GPA</a></li>
-  <li><a href="#extended-model-adding-age-and-major" id="toc-extended-model-adding-age-and-major" class="nav-link" data-scroll-target="#extended-model-adding-age-and-major">Extended model: adding <code>Age</code> and <code>Major</code></a></li>
-  <li><a href="#logistic-model-probability-of-gpa-improvement" id="toc-logistic-model-probability-of-gpa-improvement" class="nav-link" data-scroll-target="#logistic-model-probability-of-gpa-improvement">Logistic model: probability of GPA improvement</a></li>
-  </ul></li>
+  <li><a href="#gpa-change" id="toc-gpa-change" class="nav-link" data-scroll-target="#gpa-change">GPA change</a></li>
   <li><a href="#sec-career-confidence" id="toc-sec-career-confidence" class="nav-link" data-scroll-target="#sec-career-confidence">Career confidence</a></li>
-  <li><a href="#correlations-with-gpa-metrics" id="toc-correlations-with-gpa-metrics" class="nav-link" data-scroll-target="#correlations-with-gpa-metrics">Correlations with GPA metrics</a>
-  <ul class="collapse">
-  <li><a href="#distribution-of-career-confidence" id="toc-distribution-of-career-confidence" class="nav-link" data-scroll-target="#distribution-of-career-confidence">Distribution of career confidence</a></li>
-  <li><a href="#career-confidence-model" id="toc-career-confidence-model" class="nav-link" data-scroll-target="#career-confidence-model">Career confidence model</a></li>
-  </ul></li>
   <li><a href="#sec-ai-usage" id="toc-sec-ai-usage" class="nav-link" data-scroll-target="#sec-ai-usage">AI usage and adoption</a></li>
   <li><a href="#sec-ethics" id="toc-sec-ethics" class="nav-link" data-scroll-target="#sec-ethics">Ethical concerns</a></li>
   <li><a href="#sec-time-saved" id="toc-sec-time-saved" class="nav-link" data-scroll-target="#sec-time-saved">Time saved</a></li>
-  <li><a href="#sec-clustering" id="toc-sec-clustering" class="nav-link" data-scroll-target="#sec-clustering">Clustering and segmentation</a></li>
-  <li><a href="#sec-clustering-ols" id="toc-sec-clustering-ols" class="nav-link" data-scroll-target="#sec-clustering-ols">Cluster integration into GPA model</a></li>
+  <li><a href="#sec-clustering" id="toc-sec-clustering" class="nav-link" data-scroll-target="#sec-clustering">Clustering</a></li>
+  </ul></li>
   <li><a href="#sec-main-results" id="toc-sec-main-results" class="nav-link" data-scroll-target="#sec-main-results">Main results</a></li>
   <li><a href="#sec-interpretation" id="toc-sec-interpretation" class="nav-link" data-scroll-target="#sec-interpretation">Interpretation</a></li>
   <li><a href="#sec-limitations" id="toc-sec-limitations" class="nav-link" data-scroll-target="#sec-limitations">Limitations</a></li>
   </ul></li>
-  <li><a href="#python-data-analysis-project" id="toc-python-data-analysis-project" class="nav-link" data-scroll-target="#python-data-analysis-project">Python data analysis project</a></li>
-  <li><a href="#sql-and-database-project" id="toc-sql-and-database-project" class="nav-link" data-scroll-target="#sql-and-database-project">SQL and database project</a></li>
+  <li><a href="#python-data-analysis-project" id="toc-python-data-analysis-project" class="nav-link" data-scroll-target="#python-data-analysis-project">2. Python data analysis project</a></li>
+  <li><a href="#sql-and-database-project" id="toc-sql-and-database-project" class="nav-link" data-scroll-target="#sql-and-database-project">3. SQL and database project</a></li>
   </ul>
 </nav>
     </div>
@@ -263,8 +251,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>The project is exploratory. Since the dataset does not include a control group – a distinct group of students not using AI – the results cannot unwind causal relationships. The objective is not to prove that AI improves student outcomes, but to evaluate whether the available data supports meaningful statistical relationships.</p>
 <hr>
 </section>
-<section id="sec-analytical-questions" class="level2">
-<h2 class="anchored" data-anchor-id="sec-analytical-questions">Analytical questions and main variables</h2>
+<section id="analysis" class="level2">
+<h2 class="anchored" data-anchor-id="analysis">Analysis</h2>
+<section id="sec-analytical-questions" class="level3">
+<h3 class="anchored" data-anchor-id="sec-analytical-questions">Analytical questions and main variables</h3>
 <p>The analysis focuses on five main questions:</p>
 <ol type="1">
 <li>Is there a measurable change in GPA after AI usage?</li>
@@ -292,8 +282,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <hr>
 </section>
-<section id="sec-data-preparation" class="level2">
-<h2 class="anchored" data-anchor-id="sec-data-preparation">Data loading and preparation (character variables -&gt; factors)</h2>
+<section id="sec-data-preparation" class="level3">
+<h3 class="anchored" data-anchor-id="sec-data-preparation">Data loading and preparation (character variables -&gt; factors)</h3>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stderr">
@@ -392,8 +382,10 @@ $ Career_Confidence_Score &lt;dbl&gt; 3, 4, 7, 5, 9, 4, 1, 9, 8, 3, 4, 10, 4, 3,
 <p>The dataset contains 1,500 observations and no missing values. Character variables were converted into factors, and a new variable, <code>gpa_diff</code>, was created to measure the difference between post-AI GPA and baseline GPA.</p>
 <hr>
 </section>
-<section id="sec-gpa-descriptive" class="level2">
-<h2 class="anchored" data-anchor-id="sec-gpa-descriptive">GPA change: descriptive analysis</h2>
+<section id="gpa-change" class="level3">
+<h3 class="anchored" data-anchor-id="gpa-change">GPA change</h3>
+<section id="sec-gpa-descriptive" class="level4">
+<h4 class="anchored" data-anchor-id="sec-gpa-descriptive">Descriptive analysis</h4>
 <p>The first step is descriptive. The summaries provided contain all the basic descriptive statistics. However, before modeling any relationship, I examine whether the dataset contains an observable GPA difference after AI usage.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>gpa_summary <span class="ot">&lt;-</span> tbl_database <span class="sc">|&gt;</span></span>
@@ -543,8 +535,8 @@ $ Career_Confidence_Score &lt;dbl&gt; 3, 4, 7, 5, 9, 4, 1, 9, 8, 3, 4, 10, 4, 3,
 </div>
 <hr>
 </section>
-<section id="sec-gpa-distribution" class="level2">
-<h2 class="anchored" data-anchor-id="sec-gpa-distribution">GPA difference distribution</h2>
+<section id="sec-gpa-distribution" class="level4">
+<h4 class="anchored" data-anchor-id="sec-gpa-distribution">GPA difference distribution</h4>
 <p>Before using statistical tests, the distribution of the paired differences must be inspected. For a paired t-test, the normality assumption applies to the difference, not to the two GPA variables separately.</p>
 <p>The most basic way to proceed with our assumption verification, is to construct a normal Q-Q plot.</p>
 <div class="cell">
@@ -581,11 +573,11 @@ $ Career_Confidence_Score &lt;dbl&gt; 3, 4, 7, 5, 9, 4, 1, 9, 8, 3, 4, 10, 4, 3,
 </div>
 </div>
 <p>The distribution is discretized, most likely due to rounding effects in GPA values: a GPA score in the present dataset is systematically rounded up.</p>
-<p>This limits strict normality, but the sample size (=1500) is large enough for the <strong>paired t-test</strong> to remain robust. A non-parametric <strong>Wilcoxon signed-rank test</strong> is also used as a robustness check in <a href="#sec-gpa-tests" class="quarto-xref">Section&nbsp;1.7</a>.</p>
+<p>This limits strict normality, but the sample size (=1500) is large enough for the <strong>paired t-test</strong> to remain robust. A non-parametric <strong>Wilcoxon signed-rank test</strong> is also used as a robustness check in <a href="#sec-gpa-tests" class="quarto-xref">Section&nbsp;1.3.3.3</a>.</p>
 <hr>
 </section>
-<section id="sec-gpa-tests" class="level2">
-<h2 class="anchored" data-anchor-id="sec-gpa-tests">GPA statistical testing</h2>
+<section id="sec-gpa-tests" class="level4">
+<h4 class="anchored" data-anchor-id="sec-gpa-tests">GPA statistical testing</h4>
 <p>The first inferential question is deliberately simple: <strong>do students report a higher GPA after AI usage than before?</strong></p>
 <div class="callout callout-style-default callout-tip callout-titled" title="Statistical test: paired t-test">
 <div class="callout-header d-flex align-content-center">
@@ -597,16 +589,11 @@ $ Career_Confidence_Score &lt;dbl&gt; 3, 4, 7, 5, 9, 4, 1, 9, 8, 3, 4, 10, 4, 3,
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><strong>Research question</strong></p>
-<p>Is post-AI GPA significantly different from baseline GPA?</p>
-<p><strong>Null hypothesis (H0)</strong></p>
-<p>There is no mean difference between baseline GPA and post-AI GPA.</p>
-<p><strong>Alternative hypothesis (H1)</strong></p>
-<p>There is a mean difference between baseline GPA and post-AI GPA.</p>
-<p><strong>Method</strong></p>
-<p>A paired t-test is used because both GPA measures are observed for the same students.</p>
-<p><strong>Assumptions</strong></p>
-<p>The key normality assumption applies to the paired differences. As shown in <a href="#sec-gpa-distribution" class="quarto-xref">Section&nbsp;1.6</a>, the difference is discretized and not perfectly normal. However, given the large sample size, the paired t-test should remain robust.</p>
+<p><strong>Research question: </strong> Is post-AI GPA significantly different from baseline GPA?</p>
+<p><strong>Null hypothesis (H0):</strong> There is no mean difference between baseline GPA and post-AI GPA.</p>
+<p><strong>Alternative hypothesis (H1):</strong> There is a mean difference between baseline GPA and post-AI GPA.</p>
+<p><strong>Method:</strong> A paired t-test is used because both GPA measures are observed for the same students.</p>
+<p><strong>Assumptions:</strong> The key normality assumption applies to the paired differences. As shown in <a href="#sec-gpa-distribution" class="quarto-xref">Section&nbsp;1.3.3.2</a>, the difference is discretized and not perfectly normal. However, given the large sample size, the paired t-test should remain robust.</p>
 </div>
 </div>
 <div class="cell">
@@ -634,14 +621,10 @@ $ Career_Confidence_Score &lt;dbl&gt; 3, 4, 7, 5, 9, 4, 1, 9, 8, 3, 4, 10, 4, 3,
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><strong>Null hypothesis (H0)</strong></p>
-<p>The median paired difference is equal to zero.</p>
-<p><strong>Alternative hypothesis (H1)</strong></p>
-<p>The median paired difference is not equal to zero.</p>
-<p><strong>Method</strong></p>
-<p>The Wilcoxon signed-rank test ranks the absolute paired differences and checks whether positive and negative ranks are balanced.</p>
-<p><strong>Reason for use</strong></p>
-<p>This test is less sensitive to deviations from normality and is appropriate as a robustness check after the diagnostic findings in <a href="#sec-gpa-distribution" class="quarto-xref">Section&nbsp;1.6</a>.</p>
+<p><strong>Null hypothesis (H0):</strong> The median paired difference is equal to zero.</p>
+<p><strong>Alternative hypothesis (H1):</strong> The median paired difference is not equal to zero.</p>
+<p><strong>Method:</strong> The Wilcoxon signed-rank test ranks the absolute paired differences and checks whether positive and negative ranks are balanced.</p>
+<p><strong>Reason for use:</strong> This test is less sensitive to deviations from normality and is appropriate as a robustness check after the diagnostic findings in <a href="#sec-gpa-distribution" class="quarto-xref">Section&nbsp;1.3.3.2</a>.</p>
 </div>
 </div>
 <div class="cell">
@@ -663,12 +646,12 @@ $ Career_Confidence_Score &lt;dbl&gt; 3, 4, 7, 5, 9, 4, 1, 9, 8, 3, 4, 10, 4, 3,
 <p>Our next step is to test whether AI usage variables actually explain this change.</p>
 <hr>
 </section>
-<section id="sec-gpa-models" class="level2">
-<h2 class="anchored" data-anchor-id="sec-gpa-models">Modeling GPA outcomes</h2>
+<section id="sec-gpa-models" class="level4">
+<h4 class="anchored" data-anchor-id="sec-gpa-models">Modeling GPA outcomes</h4>
 <p>The statistical tests show that GPA increases on average. The modeling stage asks a different question: <strong>can AI usage variables explain variation in GPA outcomes?</strong></p>
 <hr>
-<section id="naive-model-gpa-difference-explained-by-ai-usage" class="level3">
-<h3 class="anchored" data-anchor-id="naive-model-gpa-difference-explained-by-ai-usage">Naive model: GPA difference explained by AI usage</h3>
+<section id="naive-model-gpa-difference-explained-by-ai-usage" class="level5">
+<h5 class="anchored" data-anchor-id="naive-model-gpa-difference-explained-by-ai-usage">Naive model: GPA difference explained by AI usage</h5>
 <div class="callout callout-style-default callout-tip callout-titled" title="Model 1: OLS model on GPA difference">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -679,18 +662,12 @@ $ Career_Confidence_Score &lt;dbl&gt; 3, 4, 7, 5, 9, 4, 1, 9, 8, 3, 4, 10, 4, 3,
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><strong>Research question</strong></p>
-<p>Do AI usage variables explain GPA change?</p>
-<p><strong>Dependent variable</strong></p>
-<p><code>gpa_diff = GPA_Post_AI - GPA_Baseline</code></p>
-<p><strong>Null hypothesis (H0)</strong></p>
-<p>AI usage variables have no association with GPA change.</p>
-<p><strong>Alternative hypothesis (H1)</strong></p>
-<p>At least one AI usage variable is associated with GPA change.</p>
-<p><strong>Method</strong></p>
-<p>OLS regression is used as a first explanatory model.</p>
-<p><strong>Assumptions and diagnostics</strong></p>
-<p>Residual diagnostics are inspected after model estimation. As discussed in <a href="#sec-gpa-distribution" class="quarto-xref">Section&nbsp;1.6</a>, the dependent variable is discretized, so the model is treated as exploratory rather than definitive in terms of impact analysis.</p>
+<p><strong>Research question:</strong> Do AI usage variables explain GPA change?</p>
+<p><strong>Dependent variable:</strong> <code>gpa_diff = GPA_Post_AI - GPA_Baseline</code></p>
+<p><strong>Null hypothesis (H0):</strong> AI usage variables have no association with GPA change.</p>
+<p><strong>Alternative hypothesis (H1):</strong> At least one AI usage variable is associated with GPA change.</p>
+<p><strong>Method:</strong> OLS regression is used as a first explanatory model.</p>
+<p><strong>Assumptions and diagnostics:</strong> Residual diagnostics are inspected after model estimation. As discussed in <a href="#sec-gpa-distribution" class="quarto-xref">Section&nbsp;1.3.3.2</a>, the dependent variable is discretized, so the model is treated as exploratory rather than definitive in terms of impact analysis.</p>
 </div>
 </div>
 <div class="cell">
@@ -765,8 +742,8 @@ F-statistic: 0.5958 on 10 and 1489 DF,  p-value: 0.8185</code></pre>
 <p>In order to solve any issues related to the form of the dependent variable (<code>GPA_Post_AI - GPA_Baseline</code>), and to futher control interpersonal variations, we decided to use in the next model the original GPA scores, with <code>GPA_Post_AI</code> being the new dependent variable.</p>
 <hr>
 </section>
-<section id="adjusted-model-post-ai-gpa-controlled-by-baseline-gpa" class="level3">
-<h3 class="anchored" data-anchor-id="adjusted-model-post-ai-gpa-controlled-by-baseline-gpa">Adjusted model: post-AI GPA controlled by baseline GPA</h3>
+<section id="adjusted-model-post-ai-gpa-controlled-by-baseline-gpa" class="level5">
+<h5 class="anchored" data-anchor-id="adjusted-model-post-ai-gpa-controlled-by-baseline-gpa">Adjusted model: post-AI GPA controlled by baseline GPA</h5>
 <div class="callout callout-style-default callout-important callout-titled" title="Why baseline GPA must be controlled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -854,8 +831,8 @@ F-statistic:  1311 on 11 and 1488 DF,  p-value: &lt; 2.2e-16</code></pre>
 <p>The residual structure shows discretization and a ceiling effect near the maximum GPA value.</p>
 <hr>
 </section>
-<section id="extended-model-adding-age-and-major" class="level3">
-<h3 class="anchored" data-anchor-id="extended-model-adding-age-and-major">Extended model: adding <code>Age</code> and <code>Major</code></h3>
+<section id="extended-model-adding-age-and-major" class="level5">
+<h5 class="anchored" data-anchor-id="extended-model-adding-age-and-major">Extended model: adding <code>Age</code> and <code>Major</code></h5>
 <div class="callout callout-style-default callout-tip callout-titled" title="Socio-demographic controls">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -866,12 +843,9 @@ F-statistic:  1311 on 11 and 1488 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><strong>Research question</strong></p>
-<p>Do age and major improve the explanatory model?</p>
-<p><strong>Method</strong></p>
-<p>The adjusted GPA model is extended with <code>Age</code> and <code>Major</code>.</p>
-<p><strong>Interpretation strategy</strong></p>
-<p>This model tests whether socio-demographic variables add meaningful explanatory power beyond baseline GPA and AI usage variables.</p>
+<p><strong>Research question:</strong> Do age and major improve the explanatory model?</p>
+<p><strong>Method:</strong> The adjusted GPA model is extended with <code>Age</code> and <code>Major</code>.</p>
+<p><strong>Interpretation strategy:</strong> This model tests whether socio-demographic variables add meaningful explanatory power beyond baseline GPA and AI usage variables.</p>
 </div>
 </div>
 <div class="cell">
@@ -953,8 +927,8 @@ F-statistic: 850.4 on 17 and 1482 DF,  p-value: &lt; 2.2e-16</code></pre>
 <p>Adding age and major does not substantially improve the model. Baseline GPA remains the dominant predictor. Other effects (notably, of some majors) are weak and should not be overinterpreted without further evidence.</p>
 <hr>
 </section>
-<section id="logistic-model-probability-of-gpa-improvement" class="level3">
-<h3 class="anchored" data-anchor-id="logistic-model-probability-of-gpa-improvement">Logistic model: probability of GPA improvement</h3>
+<section id="logistic-model-probability-of-gpa-improvement" class="level5">
+<h5 class="anchored" data-anchor-id="logistic-model-probability-of-gpa-improvement">Logistic model: probability of GPA improvement</h5>
 <div class="callout callout-style-default callout-tip callout-titled" title="Alternative specification: binary improvement model">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -966,10 +940,10 @@ F-statistic: 850.4 on 17 and 1482 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 <div class="callout-body-container callout-body">
 <p>Because <code>gpa_diff</code> is a discrete variable, a binary model can be used as a complementary specification.</p>
-<p><strong>New dependent variable</strong> <code>gpa_improved</code>= 1 if <code>gpa_diff</code> &gt; 0, otherwise 0.</p>
-<p><strong>Research question</strong> Which variables predict whether a student improves their GPA?</p>
-<p><strong>Method</strong> Logistic regression is used to model the probability of improvement.</p>
-<p><strong>Interpretation</strong> Coefficients are transformed into odds ratios for readability.</p>
+<p><strong>New dependent variable:</strong> <code>gpa_improved</code>= 1 if <code>gpa_diff</code> &gt; 0, otherwise 0.</p>
+<p><strong>Research question:</strong> Which variables predict whether a student improves their GPA?</p>
+<p><strong>Method:</strong> Logistic regression is used to model the probability of improvement.</p>
+<p><strong>Interpretation:</strong> Coefficients are transformed into odds ratios for readability.</p>
 </div>
 </div>
 <div class="cell">
@@ -1061,12 +1035,12 @@ Number of Fisher Scoring iterations: 4</code></pre>
 <hr>
 </section>
 </section>
-<section id="sec-career-confidence" class="level2">
-<h2 class="anchored" data-anchor-id="sec-career-confidence">Career confidence</h2>
-<p>Let’s turn to a different kind of outcome: career confidence. This variable does not measure academic performance directly. Instead, it captures a subjective perception of future readiness for career.</p>
 </section>
-<section id="correlations-with-gpa-metrics" class="level2">
-<h2 class="anchored" data-anchor-id="correlations-with-gpa-metrics">Correlations with GPA metrics</h2>
+<section id="sec-career-confidence" class="level3">
+<h3 class="anchored" data-anchor-id="sec-career-confidence">Career confidence</h3>
+<p>Let’s turn to a different kind of outcome: career confidence. This variable does not measure academic performance directly. Instead, it captures a subjective perception of future readiness for career.</p>
+<section id="correlations-with-gpa-metrics" class="level4">
+<h4 class="anchored" data-anchor-id="correlations-with-gpa-metrics">Correlations with GPA metrics</h4>
 <div class="callout callout-style-default callout-tip callout-titled" title="Correlation analysis">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -1077,12 +1051,9 @@ Number of Fisher Scoring iterations: 4</code></pre>
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><strong>Research question</strong></p>
-<p>Is career confidence associated with GPA baseline, post-AI GPA, or GPA change?</p>
-<p><strong>Methods</strong></p>
-<p><em>Pearson</em> correlations are used for linear relationships. <em>Spearman</em> and <em>Kendall</em> correlations are added as robustness checks because both GPA and confidence scores are discrete variables.</p>
-<p><strong>Interpretation</strong></p>
-<p>If all correlations remain close to zero, there is no meaningful continuous or monotonic relationship to report.</p>
+<p><strong>Research question:</strong> Is career confidence associated with GPA baseline, post-AI GPA, or GPA change?</p>
+<p><strong>Methods:</strong> <em>Pearson</em> correlations are used for linear relationships. <em>Spearman</em> and <em>Kendall</em> correlations are added as robustness checks because both GPA and confidence scores are discrete variables.</p>
+<p><strong>Interpretation:</strong> If all correlations remain close to zero, there is no meaningful continuous or monotonic relationship to report.</p>
 </div>
 </div>
 <div class="cell">
@@ -1143,8 +1114,9 @@ Number of Fisher Scoring iterations: 4</code></pre>
 </div>
 <p>Pearson, Spearman, and Kendall correlations are all close to zero (&lt;0.03). Career confidence is therefore not meaningfully associated with baseline GPA, post-AI GPA, or GPA change.</p>
 <p>Students who improved their GPA have slightly higher average confidence (<code>5.53</code> vs.&nbsp;<code>5.25</code>, a difference of 0.28 points), but the impact is very modest.</p>
-<section id="distribution-of-career-confidence" class="level3">
-<h3 class="anchored" data-anchor-id="distribution-of-career-confidence">Distribution of career confidence</h3>
+</section>
+<section id="distribution-of-career-confidence" class="level4">
+<h4 class="anchored" data-anchor-id="distribution-of-career-confidence">Distribution of career confidence</h4>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qqnorm</span>(tbl_database<span class="sc">$</span>Career_Confidence_Score)</span>
 <span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a><span class="fu">qqline</span>(tbl_database<span class="sc">$</span>Career_Confidence_Score, <span class="at">col =</span> <span class="st">"red"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -1182,8 +1154,8 @@ Number of Fisher Scoring iterations: 4</code></pre>
 </div>
 <p>Career confidence is evidently a discrete variable evenly distributed, suggesting limited internal structure to exploit for analysis purposes.</p>
 </section>
-<section id="career-confidence-model" class="level3">
-<h3 class="anchored" data-anchor-id="career-confidence-model">Career confidence model</h3>
+<section id="career-confidence-model" class="level4">
+<h4 class="anchored" data-anchor-id="career-confidence-model">Career confidence model</h4>
 <div class="callout callout-style-default callout-tip callout-titled" title="OLS model on career confidence">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -1194,14 +1166,10 @@ Number of Fisher Scoring iterations: 4</code></pre>
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><strong>Research question</strong></p>
-<p>Can GPA, AI usage variables, age, and major explain career confidence?</p>
-<p><strong>Dependent variable</strong></p>
-<p><code>Career_Confidence_Score</code></p>
-<p><strong>Method</strong></p>
-<p>OLS regression is used as an approximation. Although the variable is discrete, it has ten levels, which allows a simple exploratory linear model.</p>
-<p><strong>Interpretation</strong></p>
-<p>The model is evaluated globally using the F-test and R², not only individual p-values.</p>
+<p><strong>Research question:</strong> Can GPA, AI usage variables, age, and major explain career confidence?</p>
+<p><strong>Dependent variable:</strong> <code>Career_Confidence_Score</code></p>
+<p><strong>Method:</strong> OLS regression is used as an approximation. Although the variable is discrete, it has ten levels, which allows a simple exploratory linear model.</p>
+<p><strong>Interpretation:</strong> The model is evaluated globally using the F-test and R², not only individual p-values.</p>
 </div>
 </div>
 <div class="cell">
@@ -1284,8 +1252,8 @@ F-statistic: 1.336 on 17 and 1482 DF,  p-value: 0.1609</code></pre>
 <hr>
 </section>
 </section>
-<section id="sec-ai-usage" class="level2">
-<h2 class="anchored" data-anchor-id="sec-ai-usage">AI usage and adoption</h2>
+<section id="sec-ai-usage" class="level3">
+<h3 class="anchored" data-anchor-id="sec-ai-usage">AI usage and adoption</h3>
 <p>At this point, our analysis changes direction. Instead of asking whether AI usage affects outcomes, I test whether baseline academic performance predicts AI usage.</p>
 <div class="callout callout-style-default callout-tip callout-titled" title="Inverted model: who uses AI more frequently?">
 <div class="callout-header d-flex align-content-center">
@@ -1297,14 +1265,10 @@ F-statistic: 1.336 on 17 and 1482 DF,  p-value: 0.1609</code></pre>
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><strong>Research question</strong></p>
-<p>Do students with lower baseline GPA use AI more frequently?</p>
-<p><strong>Null hypothesis (H0)</strong></p>
-<p>Baseline GPA, age, and major do not predict AI usage frequency.</p>
-<p><strong>Alternative hypothesis (H1)</strong></p>
-<p>At least one of these variables predicts AI usage frequency.</p>
-<p><strong>Method</strong></p>
-<p>OLS regression is used with <code>Task_Frequency_Daily</code> as the dependent variable.</p>
+<p><strong>Research question:</strong> Do students with lower baseline GPA use AI more frequently?</p>
+<p><strong>Null hypothesis (H0):</strong> Baseline GPA, age, and major do not predict AI usage frequency.</p>
+<p><strong>Alternative hypothesis (H1):</strong> At least one of these variables predicts AI usage frequency.</p>
+<p><strong>Method:</strong> OLS regression is used with <code>Task_Frequency_Daily</code> as the dependent variable.</p>
 </div>
 </div>
 <div class="cell">
@@ -1425,8 +1389,8 @@ Number of Fisher Scoring iterations: 3</code></pre>
 <p>The binary model confirms the same result: high AI usage is not meaningfully predicted by GPA, age, or major.</p>
 <hr>
 </section>
-<section id="sec-ethics" class="level2">
-<h2 class="anchored" data-anchor-id="sec-ethics">Ethical concerns</h2>
+<section id="sec-ethics" class="level3">
+<h3 class="anchored" data-anchor-id="sec-ethics">Ethical concerns</h3>
 <p>Ethical concern is an ordinal variable. Therefore, an ordered logistic regression is more appropriate than a standard linear model.</p>
 <div class="callout callout-style-default callout-tip callout-titled" title="Ordered logistic regression">
 <div class="callout-header d-flex align-content-center">
@@ -1438,14 +1402,10 @@ Number of Fisher Scoring iterations: 3</code></pre>
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><strong>Research question</strong></p>
-<p>Are ethical concerns structured by AI usage behavior?</p>
-<p><strong>Dependent variable</strong></p>
-<p><code>AI_Ethics_Concern</code></p>
-<p><strong>Method</strong></p>
-<p>An ordered logistic regression is used because ethical concern has ordered categories.</p>
-<p><strong>Interpretation</strong></p>
-<p>Odds ratios greater than 1 indicate higher odds of being in a higher concern category. Odds ratios below 1 indicate lower odds.</p>
+<p><strong>Research question:</strong> Are ethical concerns structured by AI usage behavior?</p>
+<p><strong>Dependent variable:</strong> <code>AI_Ethics_Concern</code></p>
+<p><strong>Method:</strong> An ordered logistic regression is used because ethical concern has ordered categories.</p>
+<p><strong>Interpretation:</strong> Odds ratios greater than 1 indicate higher odds of being in a higher concern category. Odds ratios below 1 indicate lower odds.</p>
 </div>
 </div>
 <div class="cell">
@@ -1527,8 +1487,8 @@ AIC: 3316.351 </code></pre>
 <p>This <strong>effect of familiarity</strong> is statistically detectable but small. Overall, ethical concern is not strongly structured by AI tool, usage case, time saved, age, or major.</p>
 <hr>
 </section>
-<section id="sec-time-saved" class="level2">
-<h2 class="anchored" data-anchor-id="sec-time-saved">Time saved</h2>
+<section id="sec-time-saved" class="level3">
+<h3 class="anchored" data-anchor-id="sec-time-saved">Time saved</h3>
 <p>Time saved is intuitively expected to be the variable most directly connected to AI usage. This makes it an important test case.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb74"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qqnorm</span>(tbl_database<span class="sc">$</span>Time_Saved_Hours_Weekly)</span>
@@ -1575,12 +1535,9 @@ AIC: 3316.351 </code></pre>
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><strong>Research question</strong></p>
-<p>Which variables explain perceived weekly time saved?</p>
-<p><strong>Dependent variable</strong></p>
-<p><code>Time_Saved_Hours_Weekly</code></p>
-<p><strong>Method</strong></p>
-<p>OLS regression is used to test whether usage frequency, usage case, AI tool, GPA, age, or major explain time saved.</p>
+<p><strong>Research question:</strong> Which variables explain perceived weekly time saved?</p>
+<p><strong>Dependent variable:</strong> <code>Time_Saved_Hours_Weekly</code></p>
+<p><strong>Method:</strong> OLS regression is used to test whether usage frequency, usage case, AI tool, GPA, age, or major explain time saved.</p>
 </div>
 </div>
 <div class="cell">
@@ -1660,8 +1617,10 @@ F-statistic: 0.5956 on 16 and 1483 DF,  p-value: 0.8894</code></pre>
 <p>There are two possible explanations for these results: either the self-reported measurement are biased, or the dataset has been constructed artificially with no relationship whatsoever to the field observations.</p>
 <hr>
 </section>
-<section id="sec-clustering" class="level2">
-<h2 class="anchored" data-anchor-id="sec-clustering">Clustering and segmentation</h2>
+<section id="sec-clustering" class="level3">
+<h3 class="anchored" data-anchor-id="sec-clustering">Clustering</h3>
+<section id="finding-clusters-in-the-data" class="level4">
+<h4 class="anchored" data-anchor-id="finding-clusters-in-the-data">Finding clusters in the data</h4>
 <p>Rather than testing linear relationships only, the final step of the analysis explores whether latent profiles of students emerge from the joint distribution of academic performance, AI usage, and perceived outcomes.</p>
 <div class="callout callout-style-default callout-tip callout-titled" title="K-means clustering">
 <div class="callout-header d-flex align-content-center">
@@ -1673,11 +1632,9 @@ F-statistic: 0.5956 on 16 and 1483 DF,  p-value: 0.8894</code></pre>
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><strong>Research question</strong></p>
-<p>Can students be grouped into distinct profiles combining academic performance, AI usage, and perceived outcomes?</p>
-<p><strong>Method</strong></p>
-<p>K-means clustering is applied to standardized numerical variables.</p>
-<p><strong>Variables used</strong></p>
+<p><strong>Research question:</strong> Can students be grouped into distinct profiles combining academic performance, AI usage, and perceived outcomes?</p>
+<p><strong>Method:</strong> K-means clustering is applied to standardized numerical variables.</p>
+<p><strong>Variables used:</strong></p>
 <ul>
 <li><code>Task_Frequency_Daily</code></li>
 <li><code>Time_Saved_Hours_Weekly</code></li>
@@ -1685,10 +1642,8 @@ F-statistic: 0.5956 on 16 and 1483 DF,  p-value: 0.8894</code></pre>
 <li><code>GPA_Baseline</code></li>
 <li><code>gpa_diff</code>.</li>
 </ul>
-<p><strong>Reason for scaling</strong></p>
-<p>Variables are measured on different scales. Standardization ensures that each variable contributes equally to the clustering algorithm.</p>
-<p><strong>Important limitation</strong></p>
-<p>Because GPA variables are included in the clustering process, the resulting clusters partially reflect outcome structure. They must therefore be interpreted as descriptive profiles, not causal groups.</p>
+<p><strong>Reason for scaling:</strong> Variables are measured on different scales. Standardization ensures that each variable contributes equally to the clustering algorithm.</p>
+<p><strong>Important limitation:</strong> Because GPA variables are included in the clustering process, the resulting clusters partially reflect outcome structure. They must therefore be interpreted as descriptive profiles, not causal groups.</p>
 </div>
 </div>
 <div class="cell">
@@ -1802,8 +1757,8 @@ F-statistic: 0.5956 on 16 and 1483 DF,  p-value: 0.8894</code></pre>
 <p>The students with higher baseline GPA gained very little from AI usage, their engagement with AI tools being generally moderate if not lower than in other groups.</p>
 <p>However, students with lower GPA baseline score did not gain anything from AI tools if not the lowest career confidence score and worse GPA results. They use AI tools almost as frequently as “improvers”, but they gain less from the tools than any other group.</p>
 </section>
-<section id="sec-clustering-ols" class="level2">
-<h2 class="anchored" data-anchor-id="sec-clustering-ols">Cluster integration into GPA model</h2>
+<section id="sec-clustering-ols" class="level4">
+<h4 class="anchored" data-anchor-id="sec-clustering-ols">Cluster integration into GPA model</h4>
 <p>To test whether these latent profiles capture additional variation in academic outcomes, cluster membership is introduced into the GPA model.</p>
 <div class="callout callout-style-default callout-tip callout-titled" title="Cluster-based regression: interpretation caution">
 <div class="callout-header d-flex align-content-center">
@@ -1815,10 +1770,8 @@ F-statistic: 0.5956 on 16 and 1483 DF,  p-value: 0.8894</code></pre>
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><strong>Objective</strong></p>
-<p>Assess whether cluster membership explains variation in post-AI GPA beyond baseline GPA and observed variables.</p>
-<p><strong>Important limitation</strong></p>
-<p>Clusters are constructed using variables directly related to GPA outcomes. Therefore, their effect in regression models reflects latent structure already present in the data, not an independent causal mechanism.</p>
+<p><strong>Objective:</strong> Assess whether cluster membership explains variation in post-AI GPA beyond baseline GPA and observed variables.</p>
+<p><strong>Important limitation:</strong> Clusters are constructed using variables directly related to GPA outcomes. Therefore, their effect in regression models reflects latent structure already present in the data, not an independent causal mechanism.</p>
 </div>
 </div>
 <div class="cell">
@@ -1903,6 +1856,8 @@ F-statistic:  3327 on 13 and 1486 DF,  p-value: &lt; 2.2e-16</code></pre>
 <p>Cluster effects capture residual performance differences not explained by observed variables. However, because clusters are partially constructed from GPA-related variables, these effects should be interpreted as <strong>latent performance regimes, not causal drivers</strong>.</p>
 <p><code>Time_Saved_Hours_Weekly</code> has a coefficient of -0.00315 (p &lt; 0.001). Higher reported time savings may result in slightly lower GPA, the baseline GPA and clustering being controlled for. The magnitude of the impact is small, but statistically clear. The influence might be a result of a latent **substitution effect* (students saving time may reduce effort); over-reliance; or efficiency replacing deep processing and deep learning.</p>
 <hr>
+</section>
+</section>
 </section>
 <section id="sec-main-results" class="level2">
 <h2 class="anchored" data-anchor-id="sec-main-results">Main results</h2>
@@ -1993,13 +1948,13 @@ F-statistic:  3327 on 13 and 1486 DF,  p-value: &lt; 2.2e-16</code></pre>
 </section>
 </section>
 <section id="python-data-analysis-project" class="level1">
-<h1>Python data analysis project</h1>
+<h1>2. Python data analysis project</h1>
 <p>Coming soon.</p>
 <p>This section will present a Python-based project using pandas, numpy, and visualization libraries to explore, clean, and model a structured dataset.</p>
 <hr>
 </section>
 <section id="sql-and-database-project" class="level1">
-<h1>SQL and database project</h1>
+<h1>3. SQL and database project</h1>
 <p>Coming soon.</p>
 <p>This section will present a database-oriented project focused on data modeling, SQL queries, relational structuring, and possibly graph database logic.</p>
 
