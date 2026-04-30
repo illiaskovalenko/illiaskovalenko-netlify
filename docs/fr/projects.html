@@ -181,9 +181,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul class="collapse">
   <li><a href="#ressources-du-projet" id="toc-ressources-du-projet" class="nav-link" data-scroll-target="#ressources-du-projet">Ressources du projet</a></li>
   <li><a href="#sec-project-overview" id="toc-sec-project-overview" class="nav-link" data-scroll-target="#sec-project-overview">Aperçu du projet</a></li>
-  </ul></li>
-  <li><a href="#analyse-des-données" id="toc-analyse-des-données" class="nav-link" data-scroll-target="#analyse-des-données">Analyse des données</a>
-  <ul class="collapse">
+  <li><a href="#analyse-des-données" id="toc-analyse-des-données" class="nav-link" data-scroll-target="#analyse-des-données">Analyse des données</a></li>
   <li><a href="#sec-analytical-questions" id="toc-sec-analytical-questions" class="nav-link" data-scroll-target="#sec-analytical-questions">Questions analytiques et variables principales</a></li>
   <li><a href="#sec-data-preparation" id="toc-sec-data-preparation" class="nav-link" data-scroll-target="#sec-data-preparation">Chargement et préparation des données (character variables -&gt; factors)</a>
   <ul class="collapse">
@@ -253,9 +251,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Le projet est exploratoire. Étant donné que le jeu de données ne comprend pas de groupe de contrôle — un groupe distinct d’étudiants n’utilisant pas l’IA — les résultats ne permettent pas d’établir de relations causales. L’objectif n’est pas de prouver que l’IA améliore les résultats des étudiants, mais d’évaluer si les données disponibles soutiennent des relations statistiques significatives.</p>
 <hr>
 </section>
+<section id="analyse-des-données" class="level2">
+<h2 class="anchored" data-anchor-id="analyse-des-données">Analyse des données</h2>
 </section>
-<section id="analyse-des-données" class="level1">
-<h1>Analyse des données</h1>
 <section id="sec-analytical-questions" class="level2">
 <h2 class="anchored" data-anchor-id="sec-analytical-questions">Questions analytiques et variables principales</h2>
 <p>L’analyse se concentre sur cinq questions principales :</p>
@@ -575,7 +573,7 @@ $ Career_Confidence_Score &lt;dbl&gt; 3, 4, 7, 5, 9, 4, 1, 9, 8, 3, 4, 10, 4, 3,
 </div>
 </div>
 <p>La distribution est discrétisée, très probablement en raison d’effets d’arrondi dans les valeurs de GPA : un score de GPA dans le présent jeu de données est systématiquement arrondi.</p>
-<p>Cela limite la normalité stricte, mais la taille de l’échantillon (=1500) est suffisamment grande pour que le <strong>test t apparié</strong> reste robuste. Un <strong>test des rangs signés de Wilcoxon</strong> non paramétrique est également utilisé comme contrôle de robustesse dans la <a href="#sec-gpa-tests" class="quarto-xref">Section&nbsp;2.2.1.3</a>.</p>
+<p>Cela limite la normalité stricte, mais la taille de l’échantillon (=1500) est suffisamment grande pour que le <strong>test t apparié</strong> reste robuste. Un <strong>test des rangs signés de Wilcoxon</strong> non paramétrique est également utilisé comme contrôle de robustesse dans la <a href="#sec-gpa-tests" class="quarto-xref">Section&nbsp;1.5.1.3</a>.</p>
 <hr>
 </section>
 <section id="sec-gpa-tests" class="level4">
@@ -595,7 +593,7 @@ $ Career_Confidence_Score &lt;dbl&gt; 3, 4, 7, 5, 9, 4, 1, 9, 8, 3, 4, 10, 4, 3,
 <p><strong>Hypothèse nulle (H0) :</strong> Il n’y a pas de différence moyenne entre la GPA de base et la GPA post-IA.</p>
 <p><strong>Hypothèse alternative (H1) :</strong> Il existe une différence moyenne entre la GPA de base et la GPA post-IA.</p>
 <p><strong>Méthode :</strong> Un test t apparié est utilisé car les deux mesures de GPA sont observées pour les mêmes étudiants.</p>
-<p><strong>Hypothèses :</strong> L’hypothèse clé de normalité s’applique aux différences appariées. Comme le montre la <a href="#sec-gpa-distribution" class="quarto-xref">Section&nbsp;2.2.1.2</a>, la différence est discrétisée et n’est pas parfaitement normale. Cependant, compte tenu de la grande taille de l’échantillon, le test t apparié devrait rester robuste.</p>
+<p><strong>Hypothèses :</strong> L’hypothèse clé de normalité s’applique aux différences appariées. Comme le montre la <a href="#sec-gpa-distribution" class="quarto-xref">Section&nbsp;1.5.1.2</a>, la différence est discrétisée et n’est pas parfaitement normale. Cependant, compte tenu de la grande taille de l’échantillon, le test t apparié devrait rester robuste.</p>
 </div>
 </div>
 <div class="cell">
@@ -626,7 +624,7 @@ $ Career_Confidence_Score &lt;dbl&gt; 3, 4, 7, 5, 9, 4, 1, 9, 8, 3, 4, 10, 4, 3,
 <p><strong>Hypothèse nulle (H0) :</strong> La différence médiane appariée est égale à zéro.</p>
 <p><strong>Hypothèse alternative (H1) :</strong> La différence médiane appariée n’est pas égale à zéro.</p>
 <p><strong>Méthode :</strong> Le test des rangs signés de Wilcoxon classe les différences appariées absolues et vérifie si les rangs positifs et négatifs sont équilibrés.</p>
-<p><strong>Raison de l’utilisation :</strong> Ce test est moins sensible aux écarts par rapport à la normalité et est approprié comme contrôle de robustesse après les résultats du diagnostic dans la <a href="#sec-gpa-distribution" class="quarto-xref">Section&nbsp;2.2.1.2</a>.</p>
+<p><strong>Raison de l’utilisation :</strong> Ce test est moins sensible aux écarts par rapport à la normalité et est approprié comme contrôle de robustesse après les résultats du diagnostic dans la <a href="#sec-gpa-distribution" class="quarto-xref">Section&nbsp;1.5.1.2</a>.</p>
 </div>
 </div>
 <div class="cell">
@@ -669,7 +667,7 @@ $ Career_Confidence_Score &lt;dbl&gt; 3, 4, 7, 5, 9, 4, 1, 9, 8, 3, 4, 10, 4, 3,
 <p><strong>Hypothèse nulle (H0) :</strong> Les variables d’utilisation de l’IA n’ont aucune association avec le changement de GPA.</p>
 <p><strong>Hypothèse alternative (H1) :</strong> Au moins une variable d’utilisation de l’IA est associée au changement de GPA.</p>
 <p><strong>Méthode :</strong> La régression MCO est utilisée comme premier modèle explicatif.</p>
-<p><strong>Hypothèses et diagnostics :</strong> Les diagnostics des résidus sont inspectés après l’estimation du modèle. Comme discuté dans la <a href="#sec-gpa-distribution" class="quarto-xref">Section&nbsp;2.2.1.2</a>, la variable dépendante est discrétisée, le modèle est donc traité comme exploratoire plutôt que définitif en termes d’analyse d’impact.</p>
+<p><strong>Hypothèses et diagnostics :</strong> Les diagnostics des résidus sont inspectés après l’estimation du modèle. Comme discuté dans la <a href="#sec-gpa-distribution" class="quarto-xref">Section&nbsp;1.5.1.2</a>, la variable dépendante est discrétisée, le modèle est donc traité comme exploratoire plutôt que définitif en termes d’analyse d’impact.</p>
 </div>
 </div>
 <div class="cell">

@@ -32,7 +32,7 @@ Le projet est exploratoire. Étant donné que le jeu de données ne comprend pas
 
 ---
 
-# Analyse des données
+## Analyse des données
 
 ## Questions analytiques et variables principales {#sec-analytical-questions}
 
