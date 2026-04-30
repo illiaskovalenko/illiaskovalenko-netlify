@@ -2,8 +2,79 @@
 title: "Projects"
 ---
 
-This section is currently under development.
+This page presents a selection of data analysis projects developed to demonstrate applied analytical skills, statistical reasoning, data structuring, and communication.
 
-Data analysis projects, including exploration, modeling, and visualization, will be available soon.
+The portfolio is structured around three complementary tracks:
 
-Datasets, methodologies, and results will be presented as structured case studies.
+1. **R / Statistical analysis**  
+2. **Python / Data analysis**  
+3. **SQL / Databases and data modeling**  
+
+The first project below focuses on exploratory impact analysis using R.
+
+---
+
+# 1. AI Impact in Student Life {#sec-ai-impact}
+
+## Project resources
+
+- [Original Kaggle dataset used for this project](https://www.kaggle.com/datasets/sohaibdevv/ai-and-student-life-2026-the-new-normal)
+- [Download the R script](/en/ai_analysis.R)
+- [Download the dataset](/en/database.csv)
+
+## Project overview {#sec-project-overview}
+
+This project explores a dataset on AI usage and student life. The objective is to assess whether AI usage is associated with academic performance, career confidence, ethical concerns, and perceived productivity gains.
+
+The analysis was conducted in **R**, using mainly the `tidyverse`, base statistical functions, and a limited number of additional libraries for modeling and result formatting (like `MASS` for ordered / multinomial models, `broom` for tidy regression models, and `stats` for clustering).
+
+The project is exploratory. Since the dataset does not include a control group -- a distinct group of students not using AI -- the results cannot unwind causal relationships. The objective is not to prove that AI improves student outcomes, but to evaluate whether the available data supports meaningful statistical relationships.
+
+---
+
+## Analytical questions and main variables {#sec-analytical-questions}
+
+The analysis focuses on five main questions:
+
+1. Is there a measurable change in GPA after AI usage?
+2. Do AI usage variables explain GPA change?
+3. Is career confidence associated with GPA or AI usage?
+4. Are ethical concerns structured by AI usage behavior?
+5. Can students be segmented into meaningful AI usage profiles?
+
+GPA scores, career confidence, and perceived ethical concerns were selected as the main dependent variables. These indicators are commonly used in educational and training-related research, and provide a standardized framework for assessing potential outcomes associated with AI usage.
+
+The dataset includes only two socio-demographic variables, `Age` and `Major`. This limited set of control variables restricts the ability to account for structural heterogeneity across students (e.g., socio-economic background, prior academic trajectory, institutional context), and therefore constrains the depth of any impact analysis.
+
+In addition, the AI usage variables (task frequency, main usage case, primary tool, and time saved) are self-reported measures collected through a questionnaire. As such, they reflect subjective perceptions rather than observed behavior, which introduces potential biases (recall bias, social desirability bias, and approximation effects).
+
+Finally, descriptive statistics indicate a high level of uniformity in distributions across the 1,500 observations. Combined with the discretized structure of several variables (notably GPA), this raises questions regarding the empirical richness of the dataset. The data may be simplified, simulated, or heavily standardized, which limits variability and reduces the likelihood of identifying strong statistical relationships.
+
+::: {.callout-warning title="Methodological positioning"}
+As a result, the analysis should be interpreted as an exploratory exercise focused on methodological rigor rather than as evidence of real-world relationships.
+:::
+
+---
+
+## Data loading and preparation {#sec-data-preparation}
+
+```{r}
+library(tidyverse)
+library(MASS)
+library(broom)
+library(stats)
+
+tbl_database <- read_csv("database.csv")
+
+glimpse(tbl_database)
+summary(tbl_database)
+any(is.na(tbl_database))
+
+tbl_database <- tbl_database |>
+  mutate(
+    across(where(is.character) & !contains("ID"), as.factor),
+    gpa_diff = GPA_Post_AI - GPA_Baseline
+  )
+```
+
+The dataset contains 1,500 observations and no missing values. Character variables were converted into factors, and a new variable, `gpa_diff`, was created to measure the difference between post-AI GPA and baseline GPA.

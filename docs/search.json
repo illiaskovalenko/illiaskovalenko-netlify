@@ -1,198 +1,191 @@
 [
   {
-    "objectID": "en/projects.html",
-    "href": "en/projects.html",
-    "title": "Projects",
+    "objectID": "fr/projects.html",
+    "href": "fr/projects.html",
+    "title": "Projets",
     "section": "",
-    "text": "This section is currently under development.\nData analysis projects, including exploration, modeling, and visualization, will be available soon.\nDatasets, methodologies, and results will be presented as structured case studies."
+    "text": "Cette section est en cours de développement.\nDes projets d’analyse de données, incluant exploration, modélisation et visualisation, seront prochainement disponibles.\nLes datasets, méthodologies et résultats détaillés seront présentés sous forme d’études de cas."
   },
   {
-    "objectID": "en/index.html",
-    "href": "en/index.html",
-    "title": "Data Analysis and Decision Support",
+    "objectID": "fr/index.html",
+    "href": "fr/index.html",
+    "title": "Analyse de données et prise de décision",
     "section": "",
-    "text": "NoteAbout me\n\n\n\n\nPhD candidate in humanities and social sciences transitioning into data analysis\n\n#data, #analysis, #insight"
+    "text": "NoteÀ propos de moi\n\n\n\n\nDoctorant en sciences humaines et sociales en reconversion vers la data analyse\n\n#data, #analyse, #insight"
   },
   {
-    "objectID": "en/index.html#who-i-am",
-    "href": "en/index.html#who-i-am",
-    "title": "Data Analysis and Decision Support",
-    "section": "Who I Am",
-    "text": "Who I Am\nJoint PhD candidate (EPHE-PSL / UCLouvain), I develop expertise in the structured analysis of complex data.\nMy profile stands out through a methodological approach: I do not focus on tools alone, but on building rigorous, interpretable, and decision-oriented analyses.\nI am transitioning into data analysis with a central motivation:\nto extract meaning from complex data by identifying relationships, patterns, and underlying structures.\nI place particular emphasis on translating these results — through structuring, visualization, and storytelling — to make them immediately understandable and actionable."
+    "objectID": "fr/index.html#ce-que-je-peux-vous-apporter",
+    "href": "fr/index.html#ce-que-je-peux-vous-apporter",
+    "title": "Analyse de données et prise de décision",
+    "section": "Ce que je peux vous apporter",
+    "text": "Ce que je peux vous apporter\n\nStructuration et clarification de problématiques complexes\n\nNettoyage, transformation et fiabilisation de données\n\nAnalyse rigoureuse appuyée sur des méthodes statistiques\n\nVisualisation et mise en récit des données (data storytelling)\n\nTraduction des analyses en insights compréhensibles pour des interlocuteurs non techniques\n\nMise en dialogue entre les données et les équipes pour orienter la décision"
   },
   {
-    "objectID": "en/index.html#what-i-can-bring",
-    "href": "en/index.html#what-i-can-bring",
-    "title": "Data Analysis and Decision Support",
-    "section": "What I Can Bring",
-    "text": "What I Can Bring\n\nStructuring and clarifying complex problems\n\nData cleaning, transformation, and reliability\n\nRigorous analysis grounded in statistical methods\n\nData visualization and storytelling\n\nTranslating analyses into insights understandable by non-technical stakeholders\n\nBridging the gap between data and teams to support decision-making"
+    "objectID": "fr/index.html#explorez-mes-projets-ma-démarche-et-mon-parcours",
+    "href": "fr/index.html#explorez-mes-projets-ma-démarche-et-mon-parcours",
+    "title": "Analyse de données et prise de décision",
+    "section": "Explorez mes projets, ma démarche et mon parcours",
+    "text": "Explorez mes projets, ma démarche et mon parcours\nProjets · Démarche · CV · Contact"
   },
   {
-    "objectID": "en/index.html#explore",
-    "href": "en/index.html#explore",
-    "title": "Data Analysis and Decision Support",
-    "section": "Explore",
-    "text": "Explore\nProjects · Approach · CV · Contact"
-  },
-  {
-    "objectID": "en/contact.html",
-    "href": "en/contact.html",
-    "title": "Reach out",
+    "objectID": "fr/contact.html",
+    "href": "fr/contact.html",
+    "title": "Me contacter",
     "section": "",
-    "text": "I am currently seeking opportunities in data analysis (2 year work-study programme)."
+    "text": "Je suis ouvert aux opportunités en analyse de données et business analysis (alternance 2 ans)."
   },
   {
-    "objectID": "en/contact.html#contact-details",
-    "href": "en/contact.html#contact-details",
-    "title": "Reach out",
-    "section": "Contact details",
-    "text": "Contact details\n\n\n🔗 LinkedIn\nilliakovalenko\n💻 GitHub\nilliaskovalenko\n\n✉️ Email\nilliaskovalenko@gmail.com\n📍 Location\nParis / Île-de-France"
+    "objectID": "fr/contact.html#coordonnées",
+    "href": "fr/contact.html#coordonnées",
+    "title": "Me contacter",
+    "section": "Coordonnées",
+    "text": "Coordonnées\n\n\n🔗 LinkedIn\nilliakovalenko\n💻 GitHub\nilliaskovalenko\n\n✉️ Email\nilliaskovalenko@gmail.com\n📍 Localisation\nParis / Île-de-France"
   },
   {
-    "objectID": "en/contact.html#references",
-    "href": "en/contact.html#references",
-    "title": "Reach out",
-    "section": "References",
-    "text": "References\nLetters of recommendation available upon request."
+    "objectID": "fr/contact.html#références",
+    "href": "fr/contact.html#références",
+    "title": "Me contacter",
+    "section": "Références",
+    "text": "Références\nLettres de recommandation disponibles sur demande."
   },
   {
-    "objectID": "en/cv.html",
-    "href": "en/cv.html",
+    "objectID": "fr/cv.html",
+    "href": "fr/cv.html",
     "title": "CV",
     "section": "",
-    "text": "📄 Download CV (PDF)"
+    "text": "📄 Télécharger le CV (PDF)"
   },
   {
-    "objectID": "en/cv.html#université-paris-sciences-et-lettres-psl",
-    "href": "en/cv.html#université-paris-sciences-et-lettres-psl",
+    "objectID": "fr/cv.html#université-paris-sciences-et-lettres-psl",
+    "href": "fr/cv.html#université-paris-sciences-et-lettres-psl",
     "title": "CV",
     "section": "Université Paris Sciences et Lettres (PSL)",
-    "text": "Université Paris Sciences et Lettres (PSL)\nPhD Candidate – Data analysis and complex data structuring\nParis | 2023–2026\n\nBuilt and structured multi-source datasets (cleaning, normalization, disambiguation).\nDesigned relational and graph data models (SQLite, Neo4j).\nDeveloped analytical workflows in R (tidyverse): transformation, aggregation, EDA.\nProduced reproducible analytical reports (Quarto).\nConducted network analysis to identify structures and patterns."
+    "text": "Université Paris Sciences et Lettres (PSL)\nDoctorant – Analyse de données et structuration de corpus complexes\nParis | 2023–2026\n\nConstitution et structuration d’un corpus de données multi-sources (nettoyage, normalisation, désambiguïsation).\nConception d’un modèle de données relationnel et graphe (SQLite, Neo4j).\nDéveloppement de workflows d’analyse sous R (tidyverse) : transformation, agrégation, EDA.\nProduction de rapports analytiques reproductibles (Quarto).\nAnalyse de réseaux et identification de structures et tendances."
   },
   {
-    "objectID": "en/cv.html#université-paris-nanterre",
-    "href": "en/cv.html#université-paris-nanterre",
+    "objectID": "fr/cv.html#université-paris-nanterre",
+    "href": "fr/cv.html#université-paris-nanterre",
     "title": "CV",
     "section": "Université Paris Nanterre",
-    "text": "Université Paris Nanterre\nTeaching Assistant – Data analysis and modeling\nNanterre | 2025\n\nTaught data structuring and variable formalization.\nIntroduced modeling of relationships between variables.\nTrained students in applied statistical methods (t-tests, ANOVA, OLS regression, PCA).\nSupervised analysis, interpretation, and reporting."
+    "text": "Université Paris Nanterre\nChargé d’enseignement – Analyse et modélisation de données\nNanterre | 2025\n\nEnseignement de la structuration des données et de la formalisation des variables.\nIntroduction à la modélisation des relations entre variables.\nFormation aux méthodes statistiques appliquées (tests T, ANOVA, régression OLS, PCA).\nEncadrement de l’analyse, de l’interprétation et du reporting."
   },
   {
-    "objectID": "en/cv.html#université-paris-lumières",
-    "href": "en/cv.html#université-paris-lumières",
+    "objectID": "fr/cv.html#université-paris-lumières",
+    "href": "fr/cv.html#université-paris-lumières",
     "title": "CV",
     "section": "Université Paris Lumières",
-    "text": "Université Paris Lumières\nOperations Manager – Process analysis and optimization\nCampus Condorcet | 2023\n\nAnalyzed and optimized organizational processes.\nDefined and monitored key performance indicators (KPIs).\nStructured and improved reliability of data flows.\nCoordinated stakeholders and managed operations."
+    "text": "Université Paris Lumières\nResponsable – Analyse opérationnelle et optimisation des processus\nCampus Condorcet | 2023\n\nAnalyse et optimisation de processus organisationnels.\nDéfinition et suivi d’indicateurs de performance (KPI).\nStructuration et fiabilisation des flux de données.\nCoordination multi-acteurs et pilotage opérationnel."
   },
   {
-    "objectID": "en/cv.html#data-analysis",
-    "href": "en/cv.html#data-analysis",
+    "objectID": "fr/cv.html#data-analysis",
+    "href": "fr/cv.html#data-analysis",
     "title": "CV",
     "section": "Data analysis",
-    "text": "Data analysis\n\nData cleaning and transformation\n\nExploratory data analysis (EDA)\n\nDescriptive and statistical analysis\n\nModeling\n\nAnalytical reporting"
+    "text": "Data analysis\n\nNettoyage et transformation de données\n\nAnalyse exploratoire (EDA)\n\nStatistiques descriptives et analyse statistique\n\nModélisation\n\nReporting analytique"
   },
   {
-    "objectID": "en/cv.html#data-tools",
-    "href": "en/cv.html#data-tools",
+    "objectID": "fr/cv.html#data-tools",
+    "href": "fr/cv.html#data-tools",
     "title": "CV",
     "section": "Data tools",
-    "text": "Data tools\n\nR (tidyverse, ggplot2)\n\nPython (pandas, numpy)\n\nSQL (in progress)\n\nNeo4j\n\nJamovi, Stata"
+    "text": "Data tools\n\nR (tidyverse, ggplot2)\n\nPython (pandas, numpy)\n\nSQL (en cours)\n\nNeo4j\n\nJamovi, Stata"
   },
   {
-    "objectID": "en/cv.html#business-analysis",
-    "href": "en/cv.html#business-analysis",
+    "objectID": "fr/cv.html#business-analysis",
+    "href": "fr/cv.html#business-analysis",
     "title": "CV",
     "section": "Business analysis",
-    "text": "Business analysis\n\nProblem structuring\n\nProcess mapping\n\nKPI tracking\n\nContinuous improvement"
+    "text": "Business analysis\n\nAnalyse de problématiques\n\nProcess mapping\n\nKPI et pilotage\n\nAmélioration continue"
   },
   {
-    "objectID": "en/cv.html#tools",
-    "href": "en/cv.html#tools",
+    "objectID": "fr/cv.html#outils",
+    "href": "fr/cv.html#outils",
     "title": "CV",
-    "section": "Tools",
-    "text": "Tools\n\nGit / GitHub\n\nExcel / Google Sheets\n\nQuarto / Markdown\n\nNotion / Trello"
+    "section": "Outils",
+    "text": "Outils\n\nGit / GitHub\n\nExcel / Google Sheets\n\nQuarto / Markdown\n\nNotion / Trello"
   },
   {
-    "objectID": "en/cv.html#languages",
-    "href": "en/cv.html#languages",
+    "objectID": "fr/cv.html#langues",
+    "href": "fr/cv.html#langues",
     "title": "CV",
-    "section": "Languages",
-    "text": "Languages\nFrench C1 · English C1 · Ukrainian C2 · Russian C2 · Greek B2"
+    "section": "Langues",
+    "text": "Langues\nFrançais C1 · Anglais C1 · Ukrainien C2 · Russe C2 · Grec B2"
   },
   {
-    "objectID": "en/cv.html#phd-history-ongoing",
-    "href": "en/cv.html#phd-history-ongoing",
+    "objectID": "fr/cv.html#doctorat-histoire-en-cours",
+    "href": "fr/cv.html#doctorat-histoire-en-cours",
     "title": "CV",
-    "section": "PhD – History (ongoing)",
-    "text": "PhD – History (ongoing)\nEPHE-PSL / UCLouvain\nSince 2023"
+    "section": "Doctorat – Histoire (en cours)",
+    "text": "Doctorat – Histoire (en cours)\nEPHE-PSL / UCLouvain\nDepuis 2023"
   },
   {
-    "objectID": "en/cv.html#masters-degree-civilizations-cultures-societies",
-    "href": "en/cv.html#masters-degree-civilizations-cultures-societies",
+    "objectID": "fr/cv.html#master-civilisations-cultures-sociétés",
+    "href": "fr/cv.html#master-civilisations-cultures-sociétés",
     "title": "CV",
-    "section": "Master’s degree – Civilizations, cultures, societies",
-    "text": "Master’s degree – Civilizations, cultures, societies\nEPHE-PSL\n2022–2023 · Highest honors"
+    "section": "Master – Civilisations, cultures, sociétés",
+    "text": "Master – Civilisations, cultures, sociétés\nEPHE-PSL\n2022–2023 · Mention Très bien"
   },
   {
-    "objectID": "en/cv.html#bachelors-degree-psychology",
-    "href": "en/cv.html#bachelors-degree-psychology",
+    "objectID": "fr/cv.html#licence-psychologie",
+    "href": "fr/cv.html#licence-psychologie",
     "title": "CV",
-    "section": "Bachelor’s degree – Psychology",
-    "text": "Bachelor’s degree – Psychology\nUniversité Paris Nanterre"
+    "section": "Licence – Psychologie",
+    "text": "Licence – Psychologie\nUniversité Paris Nanterre\n2019–2022"
   },
   {
-    "objectID": "en/method.html",
-    "href": "en/method.html",
-    "title": "Approach",
+    "objectID": "fr/method.html",
+    "href": "fr/method.html",
+    "title": "Démarche",
     "section": "",
-    "text": "My approach combines analytical rigor, data structuring, and actionable insight generation.\nI primarily work with complex, heterogeneous, or poorly structured data, using exploration, modeling, and interpretation methods.\nThe objective is consistent: transforming data into clear and decision-oriented insights.\n\n\n\n\nExploratory data analysis (EDA) using R / Python\n\nIdentification of structures, anomalies, and biases\n\nText data analysis (qualitative and quantitative)\n\nIntegration of heterogeneous data sources\n\nThis phase focuses on understanding the internal logic of the data before modeling.\n\n\n\n\n\nData cleaning, normalization, and disambiguation\n\nStructuring complex datasets (tabular and relational)\n\nDatabase modeling (SQL, Neo4j / Cypher)\n\nBuilding usable datasets\n\nI place strong emphasis on handling messy or incomplete data requiring advanced structuring.\n\n\n\n\n\nDescriptive and inferential statistics\n\nModeling relationships between variables (regression, PCA, etc.)\n\nNetwork and relational analysis\n\nCritical interpretation of results\n\nMy approach is grounded in solid statistical and econometric foundations (including Wooldridge).\n\n\n\n\n\nData visualization (R, ggplot2, BI tools in progress)\n\nIdentification of patterns and relationships\n\nClear and structured representations\n\nVisualization is central to both analysis and communication.\n\n\n\n\n\nTranslating analysis into actionable insights\n\nStructuring results into clear narratives\n\nAdapting communication to non-technical stakeholders\n\nConcise and effective presentation\n\nI view analysis as a bridge between data and teams, supporting informed decision-making.\n\n\n\n\n\nR (tidyverse, ggplot2)\n\nPython (pandas, numpy)\n\nSQL (in progress)\n\nNeo4j / Cypher\n\nExcel (advanced)\n\nPower BI (in progress), Tableau (in progress)\n\nRStudio / Posit, Jupyter, VS Code\n\n\n\n\n\n\nHandling complex and poorly structured data\n\nText data analysis (qualitative & quantitative)\n\nAdvanced data structuring\n\nStrong methodological rigor\n\nAbility to communicate insights clearly\n\nStrong autonomy in analytical work and learning\n\nRapid ability to adopt new tools, languages, and methods\n\nMy positioning combines:\n\nrigorous analysis → structuring → insight → communication."
+    "text": "Mon approche repose sur une articulation entre rigueur analytique, structuration des données et production d’insights exploitables.\nJe travaille en priorité sur des données complexes, hétérogènes ou imparfaitement structurées, en mobilisant des méthodes d’exploration, de modélisation et d’interprétation.\nL’objectif est constant : transformer les données en informations compréhensibles et utiles à la prise de décision.\n\n\n\n\nAnalyse exploratoire (EDA) sous R / Python\n\nIdentification des structures, anomalies et biais\n\nAnalyse de données textuelles (qualitative et quantitative)\n\nMise en relation de sources hétérogènes\n\nCette phase vise à comprendre la logique interne des données avant toute modélisation.\n\n\n\n\n\nNettoyage, normalisation et désambiguïsation\n\nStructuration de données complexes (tabulaires et relationnelles)\n\nModélisation de bases de données (SQL, Neo4j / Cypher)\n\nConstruction de datasets exploitables\n\nJe porte une attention particulière aux données mal ordonnées ou incomplètes, qui nécessitent une structuration avancée.\n\n\n\n\n\nStatistiques descriptives et inférentielles\n\nModélisation des relations entre variables (régression, PCA, etc.)\n\nAnalyse de réseaux et de structures relationnelles\n\nInterprétation critique des résultats\n\nMa pratique s’appuie sur des bases solides en statistiques et économétrie (notamment Wooldridge).\n\n\n\n\n\nVisualisation de données (R, ggplot2, outils BI en cours)\n\nMise en évidence de tendances et relations\n\nConstruction de représentations claires et synthétiques\n\nLa visualisation est un outil central pour comprendre et faire comprendre les résultats.\n\n\n\n\n\nTraduction des analyses en insights exploitables\n\nStructuration narrative des résultats\n\nAdaptation à des interlocuteurs non techniques\n\nPrésentation claire et synthétique\n\nJe conçois l’analyse comme un dialogue entre les données et les équipes, visant à orienter la décision.\n\n\n\n\n\nR (tidyverse, ggplot2)\n\nPython (pandas, numpy)\n\nSQL (en cours)\n\nNeo4j / Cypher\n\nExcel (avancé)\n\nPower BI (en cours), Tableau (en cours)\n\nRStudio / Posit, Jupyter, VS Code\n\n\n\n\n\n\nAnalyse de données complexes et mal structurées\n\nAnalyse de données textuelles (qualitative & quantitative)\n\nStructuration avancée de l’information\n\nRigueur méthodologique issue de la recherche\n\nCapacité à produire des analyses claires et communicables\n\nForte autonomie de travail et d’apprentissage\n\nCapacité d’appropriation rapide de nouveaux outils, langages et méthodes\n\nMon positionnement repose sur une combinaison :\n\nanalyse rigoureuse → structuration → insight → communication."
   },
   {
-    "objectID": "en/method.html#data-exploration-and-understanding",
-    "href": "en/method.html#data-exploration-and-understanding",
-    "title": "Approach",
+    "objectID": "fr/method.html#exploration-et-compréhension-des-données",
+    "href": "fr/method.html#exploration-et-compréhension-des-données",
+    "title": "Démarche",
     "section": "",
-    "text": "Exploratory data analysis (EDA) using R / Python\n\nIdentification of structures, anomalies, and biases\n\nText data analysis (qualitative and quantitative)\n\nIntegration of heterogeneous data sources\n\nThis phase focuses on understanding the internal logic of the data before modeling."
+    "text": "Analyse exploratoire (EDA) sous R / Python\n\nIdentification des structures, anomalies et biais\n\nAnalyse de données textuelles (qualitative et quantitative)\n\nMise en relation de sources hétérogènes\n\nCette phase vise à comprendre la logique interne des données avant toute modélisation."
   },
   {
-    "objectID": "en/method.html#data-cleaning-and-structuring",
-    "href": "en/method.html#data-cleaning-and-structuring",
-    "title": "Approach",
+    "objectID": "fr/method.html#nettoyage-et-structuration",
+    "href": "fr/method.html#nettoyage-et-structuration",
+    "title": "Démarche",
     "section": "",
-    "text": "Data cleaning, normalization, and disambiguation\n\nStructuring complex datasets (tabular and relational)\n\nDatabase modeling (SQL, Neo4j / Cypher)\n\nBuilding usable datasets\n\nI place strong emphasis on handling messy or incomplete data requiring advanced structuring."
+    "text": "Nettoyage, normalisation et désambiguïsation\n\nStructuration de données complexes (tabulaires et relationnelles)\n\nModélisation de bases de données (SQL, Neo4j / Cypher)\n\nConstruction de datasets exploitables\n\nJe porte une attention particulière aux données mal ordonnées ou incomplètes, qui nécessitent une structuration avancée."
   },
   {
-    "objectID": "en/method.html#statistical-analysis-and-modeling",
-    "href": "en/method.html#statistical-analysis-and-modeling",
-    "title": "Approach",
+    "objectID": "fr/method.html#analyse-statistique-et-modélisation",
+    "href": "fr/method.html#analyse-statistique-et-modélisation",
+    "title": "Démarche",
     "section": "",
-    "text": "Descriptive and inferential statistics\n\nModeling relationships between variables (regression, PCA, etc.)\n\nNetwork and relational analysis\n\nCritical interpretation of results\n\nMy approach is grounded in solid statistical and econometric foundations (including Wooldridge)."
+    "text": "Statistiques descriptives et inférentielles\n\nModélisation des relations entre variables (régression, PCA, etc.)\n\nAnalyse de réseaux et de structures relationnelles\n\nInterprétation critique des résultats\n\nMa pratique s’appuie sur des bases solides en statistiques et économétrie (notamment Wooldridge)."
   },
   {
-    "objectID": "en/method.html#visualization-and-interpretation",
-    "href": "en/method.html#visualization-and-interpretation",
-    "title": "Approach",
+    "objectID": "fr/method.html#visualisation-et-interprétation",
+    "href": "fr/method.html#visualisation-et-interprétation",
+    "title": "Démarche",
     "section": "",
-    "text": "Data visualization (R, ggplot2, BI tools in progress)\n\nIdentification of patterns and relationships\n\nClear and structured representations\n\nVisualization is central to both analysis and communication."
+    "text": "Visualisation de données (R, ggplot2, outils BI en cours)\n\nMise en évidence de tendances et relations\n\nConstruction de représentations claires et synthétiques\n\nLa visualisation est un outil central pour comprendre et faire comprendre les résultats."
   },
   {
-    "objectID": "en/method.html#data-storytelling-and-communication",
-    "href": "en/method.html#data-storytelling-and-communication",
-    "title": "Approach",
+    "objectID": "fr/method.html#data-storytelling-et-communication",
+    "href": "fr/method.html#data-storytelling-et-communication",
+    "title": "Démarche",
     "section": "",
-    "text": "Translating analysis into actionable insights\n\nStructuring results into clear narratives\n\nAdapting communication to non-technical stakeholders\n\nConcise and effective presentation\n\nI view analysis as a bridge between data and teams, supporting informed decision-making."
+    "text": "Traduction des analyses en insights exploitables\n\nStructuration narrative des résultats\n\nAdaptation à des interlocuteurs non techniques\n\nPrésentation claire et synthétique\n\nJe conçois l’analyse comme un dialogue entre les données et les équipes, visant à orienter la décision."
   },
   {
-    "objectID": "en/method.html#tools-and-environment",
-    "href": "en/method.html#tools-and-environment",
-    "title": "Approach",
+    "objectID": "fr/method.html#outils-et-environnement",
+    "href": "fr/method.html#outils-et-environnement",
+    "title": "Démarche",
     "section": "",
-    "text": "R (tidyverse, ggplot2)\n\nPython (pandas, numpy)\n\nSQL (in progress)\n\nNeo4j / Cypher\n\nExcel (advanced)\n\nPower BI (in progress), Tableau (in progress)\n\nRStudio / Posit, Jupyter, VS Code"
+    "text": "R (tidyverse, ggplot2)\n\nPython (pandas, numpy)\n\nSQL (en cours)\n\nNeo4j / Cypher\n\nExcel (avancé)\n\nPower BI (en cours), Tableau (en cours)\n\nRStudio / Posit, Jupyter, VS Code"
   },
   {
-    "objectID": "en/method.html#key-strengths",
-    "href": "en/method.html#key-strengths",
-    "title": "Approach",
+    "objectID": "fr/method.html#atouts-différenciants",
+    "href": "fr/method.html#atouts-différenciants",
+    "title": "Démarche",
     "section": "",
-    "text": "Handling complex and poorly structured data\n\nText data analysis (qualitative & quantitative)\n\nAdvanced data structuring\n\nStrong methodological rigor\n\nAbility to communicate insights clearly\n\nStrong autonomy in analytical work and learning\n\nRapid ability to adopt new tools, languages, and methods\n\nMy positioning combines:\n\nrigorous analysis → structuring → insight → communication."
+    "text": "Analyse de données complexes et mal structurées\n\nAnalyse de données textuelles (qualitative & quantitative)\n\nStructuration avancée de l’information\n\nRigueur méthodologique issue de la recherche\n\nCapacité à produire des analyses claires et communicables\n\nForte autonomie de travail et d’apprentissage\n\nCapacité d’appropriation rapide de nouveaux outils, langages et méthodes\n\nMon positionnement repose sur une combinaison :\n\nanalyse rigoureuse → structuration → insight → communication."
   }
 ]
