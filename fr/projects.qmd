@@ -34,7 +34,7 @@ Le projet est exploratoire. Étant donné que le jeu de données ne comprend pas
 
 ## Analyse des données
 
-## Questions analytiques et variables principales {#sec-analytical-questions}
+### Questions analytiques et variables principales {#sec-analytical-questions}
 
 L'analyse se concentre sur cinq questions principales :
 
@@ -58,7 +58,7 @@ En conséquence, l'analyse doit être interprétée comme un exercice exploratoi
 
 ---
 
-## Chargement et préparation des données (character variables -> factors) {#sec-data-preparation}
+### Chargement et préparation des données (character variables -> factors) {#sec-data-preparation}
 
 ```{r}
 library(tidyverse)
